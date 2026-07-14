@@ -1,0 +1,17 @@
+name: omd
+root: /home/thadryan/Vaults/Projects/Work/Primary/TheoryProject/OMD/code
+windows:
+  - code:
+      panes:
+        - bash -c "nvim; exec bash"
+  - git:
+      panes:
+        - bash -c "lazygit; exec bash"
+  - bash:
+      panes:
+        - bash
+  - server:
+      layout: main-vertical
+      panes:
+        - bash -c "cd /mnt/Workspace/TheoryProject/OMD && nvim -R -c 'set nomodifiable'; exec bash"
+        - bash -c "cd /mnt/Workspace/TheoryProject/OMD && exec bash"

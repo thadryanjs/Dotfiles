@@ -1,0 +1,141 @@
+" =============================================================================
+" SHORTSWORD VIMRC - Core Power, Zero Bloat
+" =============================================================================
+
+" --- 1. ESSENTIAL SETTINGS ---
+let mapleader = " "
+set nocompatible
+set runtimepath+="/home/thadryan/Vaults/Projects/Dotfiles/.vim"
+filetype plugin indent on
+syntax on
+
+set number relativenumber
+set shiftwidth=4 tabstop=4 expandtab
+set incsearch ignorecase smartcase
+set hlsearch showcmd showmode showmatch
+set signcolumn=yes
+set clipboard=unnamedplus
+set backspace=indent,eol,start
+set laststatus=2
+set termguicolors
+set background=dark
+
+" Comforts
+set history=1000
+set wildmenu
+set wildmode=list:longest
+set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
+set formatoptions-=cro
+
+" --- 2. PLUGINS (vim-plug) ---
+call plug#begin('~/.vim/plugged')
+    " The Blade: LSP & Completion
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    
+    " Navigation & Search
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
+    Plug 'preservim/nerdtree'
+    
+    " Editing Speed
+    Plug 'tpope/vim-surround'
+    Plug 'preservim/nerdcommenter'
+    Plug 'matze/vim-move'
+    Plug 'vim-scripts/autopairs.vim'
+    
+    " Domain Specific
+    Plug 'jpalardy/vim-slime'
+    
+    " Aesthetics
+    " Removed base16-vim in favor of static moon.vim
+call plug#end()
+
+" Fallback colors until plugins load
+colorscheme desert 
+" Actual colorscheme
+silent! colorscheme moon
+
+" --- 3. MUSCLE MEMORY (Synced with Neovim) ---
+imap jj <Esc>
+nnoremap q <C-v>
+nmap <C-s> :w!<CR>
+imap <C-s> <Esc>:w!<CR>a
+
+" Visual line navigation
+nmap j gj
+nmap k gk
+nmap <Up> gk
+nmap <Down> gj
+
+" System clipboard integration
+nmap <C-c> "+y
+nmap <C-v> "+p
+
+" Buffer & Directory navigation
+nnoremap <leader>bn :bnext<CR>
+nnoremap <leader>bp :bprevious<CR>
+nnoremap <leader>cd :cd %:p:h<CR>
+nnoremap <leader>hr :nohlsearch<CR>
+nnoremap <c-z> <nop>
+
+" Window resizing
+nnoremap <C-Up> :resize +1<CR>
+nnoremap <C-Down> :resize -1<CR>
+nnoremap <C-Left> :vertical resize -1<CR>
+nnoremap <C-Right> :vertical resize +1<CR>
+
+" --- 4. JUPYTER / JUPYTEXT LOGIC ---
+imap kk %>%
+nmap <leader>jc i# %% [code]
+nmap <leader>jf /# %% \[code\]<CR>
+imap <C-o> # %% [code]
+
+" Toggle Cell Logic: Flip between active and inactive delimiters
+function! ToggleCell()
+    let lines = getline(1, '$')
+    let modified = 0
+    for i in range(len(lines))
+        if lines[i] =~# '^# %% '
+            let lines[i] = '# [inactive delimiter] [code]'
+            let modified = 1
+        elseif lines[i] =~# '^# \[inactive delimiter\] '
+            let lines[i] = '# %% [code]'
+            let modified = 1
+        endif
+    endfor
+    if modified | call setline(1, lines) | endif
+endfunction
+command! ToggleCell call ToggleCell()
+nnoremap <leader>jt :ToggleCell<CR>
+nnoremap <leader>si o!import code; code.interact(local=vars())<Esc>
+
+" --- 5. PLUGIN MAPPINGS ---
+
+" NERDTree
+nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
+
+" FZF (Search)
+nnoremap <leader>ff :Files<CR>
+nnoremap <leader>fg :Rg<CR>
+nnoremap <leader>fb :Buffers<CR>
+nnoremap <leader>fr :call fzf#run(fzf#wrap({'source': v:oldfiles, 'sink': 'edit'}))<CR>
+
+" CoC / Completion
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+
+" Slime (Send to Zellij/Tmux)
+nnoremap <Leader>ss :call slime#send_lines(v:count1)<CR>
+nnoremap <Leader>sc :call slime#send_cell()<CR>
+" Auto-detect target if possible, default zellij
+let g:slime_target = getenv('TERMINAL_EMULATOR') == 'tmux' ? 'tmux' : 'zellij'
+
+" Move lines (Shift+hjkl)
+nnoremap <S-j> <Plug>MoveLineDown
+nnoremap <S-k> <Plug>MoveLineUp
+nnoremap <S-h> <Plug>MoveCharLeft
+nnoremap <S-l> <Plug>MoveCharRight
+vnoremap <S-j> <Plug>MoveBlockDown
+vnoremap <S-k> <Plug>MoveBlockUp
+vnoremap <S-h> <Plug>MoveBlockLeft
+vnoremap <S-l> <Plug>MoveBlockRight

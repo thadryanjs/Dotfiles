@@ -1,0 +1,17 @@
+name: opthalmology-llm
+root: /home/thadryan/Vaults/Projects/Work/Primary/RCD/OpthalmologyLLM/Code
+windows:
+  - code:
+      panes:
+        - bash -c "nvim; exec bash"
+  - git:
+      panes:
+        - bash -c "lazygit; exec bash"
+  - bash:
+      panes:
+        - bash
+  - server:
+      layout: main-vertical
+      panes:
+        - bash -c "cd /mnt/Workspace/RCD/OpthalmologyLLM && nvim -R -c 'set nomodifiable'; exec bash"
+        - bash -c "cd /mnt/Workspace/RCD/OpthalmologyLLM && exec bash"

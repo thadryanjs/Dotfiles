@@ -1,0 +1,9 @@
+[[mgr.prepend_keymap]]
+on = "["
+run = "plugin whoosh jump_by_key"
+desc = "Open bookmark menu"
+
+[[mgr.prepend_keymap]]
+on = "}"
+run = "plugin whoosh jump_by_fzf"
+desc = "Fuzzy search bookmarks"

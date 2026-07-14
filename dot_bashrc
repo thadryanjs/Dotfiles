@@ -1,0 +1,322 @@
+test -s ~/.alias && . ~/.alias || true
+# hi
+stty -ixon
+
+export EDITOR="nvim"
+# export TMUX_CONF="$HOME/.dotfiles/.config/tmux/tmux.conf"
+export LLM_KEY=NONE
+# Nix
+unset __ETC_PROFILE_NIX_SOURCED
+if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then
+  . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+fi
+
+# home-manager session vars
+if [ -e "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]; then
+  . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+fi
+
+
+
+# short-lived session token, tmpfs, per-user, wiped on reboot
+BW_SESSION_CACHE="${XDG_RUNTIME_DIR:-/tmp}/bw-session"
+
+bw_unlock() {
+  # reuse cached token if it's < 24h old and still valid
+  if [ -f "$BW_SESSION_CACHE" ] && [ -z "$(find "$BW_SESSION_CACHE" -mmin +1440 2>/dev/null)" ]; then
+    export BW_SESSION="$(cat "$BW_SESSION_CACHE")"
+    bw status 2>/dev/null | grep -q '"status":"unlocked"' && return 0
+  fi
+  BW_SESSION="$(bw unlock --raw)" || return 1
+  export BW_SESSION
+  ( umask 077; printf '%s' "$BW_SESSION" >"$BW_SESSION_CACHE" )   # mode 600
+}
+
+with_llm_keys() {
+  bw_unlock || return 1
+  local items; items="$(bw list items 2>/dev/null)"   # ONE bw call instead of three
+  OPENROUTER_API_KEY="$(jq -r '.[]|select(.name=="OpenRouterAPI").login.password'      <<<"$items")" \
+  DEEPSEEK_API_KEY="$(jq -r '.[]|select(.name=="DeepSeekAPI").login.password'          <<<"$items")" \
+  DARTMOUTH_CHAT_API_KEY="$(jq -r '.[]|select(.name=="DartmouthChatAPI").login.password' <<<"$items")" \
+  BW_SESSION= \
+  "$@"
+}
+
+opencode() { with_llm_keys command opencode "$@"; }
+pi()       { with_llm_keys command pi "$@"; }
+
+
+# ---
+alias reboot="systemctl reboot"
+alias shutdown="sudo shutdown now"
+
+alias nvimconfig="cd ~/Vaults/Projects/Dotfiles/.config/nvim"
+alias dotfiles="cd ~/Vaults/Projects/Dotfiles"
+alias config="cd ~/Vaults/Projects/Dotfiles/.config"
+
+alias restow="sh ~/Vaults/Projects/Tools/Scripts/Maintenance/stow-reverse-adopt.sh"
+
+# alias matrix="kitty --config ~/.config/kitty/unimatrix.conf unimatrix"
+
+alias dartmount="cd /mnt/Workspace"
+alias vault="cd ~/Vaults/Knowledge/"
+alias vaulthome="cd ~/Vaults/Home/"
+alias projects="cd ~/Vaults/Projects/Work/"
+
+alias discovery="sh ~/Vaults/Projects/Tools/Scripts/Dartmouth/discovery.sh"
+alias polaris="sh ~/Vaults/Projects/Tools/Scripts/Tools/polaris.sh"
+alias andes="sh ~/Vaults/Projects/Tools/Scripts/Dartmouth/andes.sh"
+alias dartfs="sh ~/Vaults/Projects/Tools/Scripts/Dartmouth/Storage/mount-dartfs.sh"
+alias vpn="sh ~/Vaults/Projects/Tools/Scripts/Dartmouth/VPN/vpn.sh"
+alias vpn-tw="sh ~/Vaults/Projects/Tools/Scripts/Dartmouth/VPN/vpn-tumbleweed.sh"
+
+alias mntssh="sshfs f006fkc@discovery7.hpcc.dartmouth.edu:/dartfs-hpc/rc/home/c/f006fkc/Workspace/opioid-predictions/triforecast sshmnt/"
+
+# alias lock="swaylock --ignore-empty-password --image /home/thadryan/Vaults/Home/Areas/Art/Backgrounds/bioshock2.jpg"
+# Tmuxinator alias - use versioned binary on openSUSE/Tumbleweed
+if command -v tmuxinator >/dev/null 2>&1; then
+    alias tmi="tmuxinator"
+elif command -v tmuxinator.ruby4.0 >/dev/null 2>&1; then
+    alias tmi="tmuxinator.ruby4.0"
+fi
+
+
+alias vpn-start='tmux new-session -d -s vpn && tmux send-keys -t vpn "sh ~/Vaults/Projects/Tools/Scripts/Dartmouth/VPN/vpn.sh" C-m && tmux split-window -h && tmux send-keys -t vpn "read -p \"Press enter for Auth...\" ; sh ~/Vaults/Projects/Tools/Scripts/Dartmouth/Auth/dartmouth-kinit.sh" C-m && tmux split-window -v && tmux send-keys -t vpn "read -p \"Press enter for FS...\" ; dartfs" C-m && tmux attach -t vpn'
+alias tv-org='tv org-projects'
+alias tv-tmux='tv tmux-sessions'
+alias tv-tmuxinator='tv tmuxinator'
+alias fproj="source ~/Vaults/Projects/Tools/Scripts/Apps/Fzf/fzf-org-projects.sh"
+alias cdf="source ~/Vaults/Projects/Tools/Scripts/Apps/Fzf/fzf-org-dirs.sh"
+
+alias focusmode="sh ~/Vaults/Projects/Tools/Scripts/Tools/focus-mode.sh"
+
+alias ls='ls --color=auto'
+alias ll='ls -lav --ignore=..'   # show long listing of all except ".."
+alias l='ls -lav --ignore=.?*'   # show long listing but no hidden dotfiles except "."
+# the Chuck command
+alias lss='ls -ltrh'
+alias open='xdg-open'
+
+export QT_QPA_PLATFORMTHEME=qt5ct
+
+# export TMUX_CONF=~/.config/tmux/tmux.conf
+# check for tmux sessions, optionally join or create
+# if [[ -z "$TMUX" ]]; then
+#     read -rp "Join tmux/fresh tmux/plain terminal/cancel? (j/f/p/c) " -n 1 tmux_choice
+#     echo ""
+#     if [[ "$tmux_choice" == "j" ]]; then
+#         sessions=$(tmux list-sessions -F "#{session_name}" 2>/dev/null)
+#         if [[ -n "$sessions" ]]; then
+#             echo "Existing sessions:"
+#             echo "$sessions" | sed 's/^/  /'
+#             echo ""
+#         fi
+#         tmif
+#     elif [[ "$tmux_choice" == "f" ]]; then
+#         exec tmux new-session
+#     elif [[ "$tmux_choice" == "c" ]]; then
+#         kill -9 $$
+#     fi
+# fi
+
+parse_git_branch() {
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}
+
+
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+    xterm-color|*-256color) color_prompt=yes;;
+esac
+
+# uncomment for a colored prompt, if the terminal has the capability; turned
+# off by default to not distract the user: the focus in a terminal window
+# should be on the output of commands, not on the prompt
+#force_color_prompt=yes
+
+if [ -n "$force_color_prompt" ]; then
+    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+	# We have color support; assume it's compliant with Ecma-48
+	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+	# a case would tend to support setf rather than setaf.)
+	color_prompt=yes
+    else
+	color_prompt=
+    fi
+fi
+
+if [ "$color_prompt" = yes ]; then
+    PS1='\[\033[01;32m\]\u@\h\[\033[00m\]\[\033[01;34m\]:\w\[\033[00m\]$(parse_git_branch)\n~:) '
+else
+    PS1='\[\033[01;32m\]\u@\h\[\033[00m\]\[\033[01;34m\]:\w\[\033[00m\]$(parse_git_branch)\n~:) '
+fi
+
+# if [ "$color_prompt" = yes ]; then
+#     # Swapped: thadryan@darlene now uses color13 (#7e62b3 - purple)
+#     # Swapped: ~:) now uses color7 (#899ca1 - blue-grey)
+#     PS1='\[\033[01;35m\]\u@\h\[\033[00m\]\[\033[01;34m\]:\w\[\033[00m\]$(parse_git_branch)\n\[\033[01;36m\]~:) \[\033[00m\]'
+# else
+#     # Swapped: thadryan@darlene now uses color13 (#7e62b3 - purple)
+#     # Swapped: ~:) now uses color7 (#899ca1 - blue-grey)
+#     PS1='\[\033[01;35m\]\u@\h\[\033[00m\]\[\033[01;34m\]:\w\[\033[00m\]$(parse_git_branch)\n\[\033[01;36m\]~:) \[\033[00m\]'
+# fi
+
+
+unset color_prompt force_color_prompt
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+*)
+    ;;
+esac
+
+if (env | grep -Fq 'DISTROBOX'); then
+    PS1='📦\[\033[01;32m\]\u@\h\[\033[00m\]\[\033[01;34m\]:\W\[\033[00m\]$(parse_git_branch)\n~:) '
+fi
+
+
+
+
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
+export PATH="/home/thadryan/.pixi/bin:$PATH"
+export PATH="$HOME/.local/share/tresorit:$PATH"
+
+## atuin
+# if you make a typo, you can't scroll up and fix it so it's not a 'command'
+# optional: https://docs.atuin.sh/configuration/config/#store_failed
+export ATUIN_NOBIND="true"
+# may need a command as arch doesn't create this file I don't think
+# https://github.com/atuinsh/atuin/issues/380
+[[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh
+eval "$(atuin init bash --disable-up-arrow)"
+
+
+## fzf
+# to see commands
+# nvim /usr/share/fzf/key-bindings.bash
+# apparently you can't disable the ctrl R one? (overwritten later)
+FZF_CTRL_T_COMMAND= FZF_ALT_C_COMMAND= eval "$(fzf --bash)"
+
+# defaults
+export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
+
+# color scheme
+# https://vitormv.github.io/fzf-themes/
+export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+    --color=pointer:#00d692,info:#8642c9
+    --border="rounded" --border-label="" --preview-window="border-rounded" --prompt="> "
+    --marker=">" --pointer="◆" --separator="─" --scrollbar="│"'
+
+# custom file search
+fzf_files() {
+    fzf \
+    --tmux \
+    --preview 'bat -n --color=always {}' \
+    --bind 'ctrl-/:change-preview-window(down|hidden|)'
+}
+bind -x '"\C-f": fzf_files'
+
+# history search
+# if you end up liking this interface better you can set
+# atuin history list --cmd-only | uniq | fzf
+# to get atuin memory into the fzf interface
+fzf_history() {
+    history | fzf \
+    --tmux \
+    --preview 'echo {}' \
+    --preview-window up:3:hidden:wrap \
+    --bind 'ctrl-/:toggle-preview' \
+    --bind 'enter:execute-silent(echo -n {2..} | pbcopy | bash)+abort'
+}
+
+bind -x '"\C-h": __fzf_history__'
+
+# custom tree search
+fzf_tree() {
+    fzf --tmux --preview 'tree -C {}'
+}
+bind -x '"\C-e": fzf_tree'
+
+# custom ripgrep search (this fails on empty dir or only dotfiles)
+fzf_ripgrep() {
+    local rg_prefix='rg --column --line-number --no-heading --color=always --smart-case'
+    fzf \
+        --tmux \
+        --bind "start:reload:$rg_prefix ''" \
+        --bind 'change:reload:$rg_prefix {q} || true' \
+        --bind 'enter:become(vim {1} +{2})' \
+        --ansi --disabled \
+        --height=50% --layout=reverse
+}
+
+# bind that to c-g
+bind -x '"\C-g": fzf_ripgrep'
+
+bind '"\C-r": reverse-search-history'
+
+function atuin_search_and_edit() {
+  local selected_command
+  selected_command=$(atuin history list --cmd-only | awk '!seen[$0]++' | fzf)
+  if [ -n "$selected_command" ]; then
+    READLINE_LINE=$selected_command
+    READLINE_POINT=${#READLINE_LINE}
+  fi
+}
+
+bind -x '"\C-a": atuin_search_and_edit'
+
+# tv tmux sessions picker
+bind -x '"\C-x": tv tmux-sessions'
+
+## zoxide
+# --cmd cd replaces builtin cd: exact paths fall through, frecency match otherwise
+eval "$(zoxide init bash --cmd cd)"
+
+# Created by `pipx` on 2026-03-13 15:17:43
+export PATH="$PATH:/home/thadryan/.local/bin"
+export PATH="$PATH:/home/thadryan/.cargo/bin"
+export PATH="$HOME/.config/emacs/bin:$PATH"
+
+if [ -f /etc/bash_completion.d/tmuxinator.bash ]; then
+    source /etc/bash_completion.d/tmuxinator.bash
+fi
+
+if [ -f ~/.bash_completion.d/tmuxinator.bash ]; then
+    source ~/.bash_completion.d/tmuxinator.bash
+fi
+
+# Kill tmux session by name
+alias tmi-kill='tmux kill-session -t'
+alias tmi-kill-picker='tmux kill-session -t $(tmux list-sessions -F "#{session_name}" | fzf)'
+
+# Tmux pickers
+
+# eval "$(tv init bash)"
+
+if [ -f /etc/os-release ] && grep -qi '^ID=debian' /etc/os-release; then
+    export PATH="$HOME/.npm-global/bin:$PATH"
+    alias pi='npx @mariozechner/pi-coding-agent'
+fi
+
+## move webclips to vault (markdownload can't do outside standard Downloads folder due to browser security policies)
+# hack for now
+if [ -n "$(ls ~/Downloads/MarkDownload/)" ] && \
+   [ -d ~/Vaults/Knowledge/Resources/WebClips ]; then
+  mv ~/Downloads/MarkDownload/* ~/Vaults/Knowledge/Resources/WebClips
+fi
+# export LD_LIBRARY_PATH=/home/thadryan/.local/lib/arch-mojo:$LD_LIBRARY_PATH
+
+
+export PATH="$PATH:$HOME/go/bin"
+export PATH="/home/thadryan/.local/share/gem/ruby/4.0.0/bin:$PATH"

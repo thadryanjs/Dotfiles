@@ -1,0 +1,17 @@
+name: surg-lapvrobo
+root: /home/thadryan/Vaults/Projects/Work/Primary/SurgicalRobots/LapVsRobo/code
+windows:
+  - code:
+      panes:
+        - bash -c "nvim; exec bash"
+  - git:
+      panes:
+        - bash -c "lazygit; exec bash"
+  - bash:
+      panes:
+        - bash
+  - server:
+      layout: main-vertical
+      panes:
+        - bash -c "cd /mnt/Workspace/SurgicalRobots/LapVsRobo/code && nvim -R -c 'set nomodifiable'; exec bash"
+        - bash -c "cd /mnt/Workspace/SurgicalRobots/LapVsRobo/code && exec bash"

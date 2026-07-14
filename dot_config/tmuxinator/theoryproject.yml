@@ -1,0 +1,14 @@
+name: theoryproject
+root: /home/thadryan/Vaults/Projects/Work/Primary/TheoryProject
+windows:
+  - code:
+      layout: main-vertical
+      panes:
+        - bash -c "nvim; exec bash"
+        - bash
+  - git:
+      panes:
+        - bash -c "lazygit; exec bash"
+  - bash:
+      panes:
+        - bash
