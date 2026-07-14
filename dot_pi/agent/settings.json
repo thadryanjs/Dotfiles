@@ -1,0 +1,163 @@
+{
+  "lastChangelogVersion": "0.80.6",
+  "defaultProvider": "Dartmouth",
+  "defaultModel": "google.gemma-4-31B-it",
+  "defaultThinkingLevel": "medium",
+  "theme": "black-metal-burzum",
+  "packages": [
+    "git:github.com/MasuRii/pi-tool-display",
+    "git:github.com/victor-software-house/pi-curated-themes",
+    "git:github.com/jonjonrankin/pi-caveman",
+    "git:github.com/dbachelder/pi-btw",
+    "git:github.com/omaclaren/pi-markdown-preview",
+    "git:https://github.com/0zheermao0/pi-yank",
+    "git:github.com/maxedapps/pi-docparser",
+    "git:https://github.com/HaphazardDev/pi-extensions",
+    "git:https://github.com/juhas96/graphify-pi",
+    "git:https://github.com/anthod0/pi-lab",
+    "git:https://github.com/jdiamond/pi-guard",
+    "git:https://github.com/nicobailon/pi-web-access",
+    "git:https://github.com/tintinweb/pi-subagents",
+    "npm:pi-image-paste"
+  ],
+  "guard": {
+    "enabled": true,
+    "matchers": {
+      "spawn": {
+        "param": "agent",
+        "type": "exact"
+      },
+      "webfetch": {
+        "param": "url",
+        "type": "glob"
+      }
+    },
+    "rules": {},
+    "profiles": {
+      "standard": {
+        "*": "ask",
+        "bash": {
+          "*": "ask",
+          "git status": "allow",
+          "git log": "allow",
+          "rm": "ask"
+        },
+        "read": {
+          "*": "allow",
+          "*.env": "deny",
+          "*.pem": "deny"
+        },
+        "write": {
+          "*": "ask"
+        },
+        "edit": {
+          "*": "ask"
+        },
+        "spawn": {
+          "build": "allow",
+          "test": "allow",
+          "*": "deny"
+        },
+        "webfetch": {
+          "*": "ask",
+          "https://github.com/*": "allow"
+        }
+      },
+      "safe": {
+        "*": "ask",
+        "bash": {
+          "*": "allow",
+          "rm*": "deny",
+          "sudo*": "deny",
+          "chmod*": "deny",
+          "chown*": "deny",
+          "dd*": "deny",
+          "mkfs*": "deny",
+          "shutdown*": "deny",
+          "reboot*": "deny"
+        },
+        "read": {
+          "*": "allow",
+          "*.env": "deny",
+          "*.pem": "deny"
+        },
+        "write": "deny",
+        "edit": "deny",
+        "spawn": {
+          "build": "allow",
+          "test": "allow",
+          "*": "deny"
+        },
+        "webfetch": {
+          "*": "ask",
+          "https://github.com/*": "allow"
+        }
+      },
+      "gloves-off": {
+        "*": "allow",
+        "bash": {
+          "*": "allow",
+          "rm -rf /*": "deny",
+          "rm -rf /": "deny",
+          "rm -rf ~/*": "deny",
+          "rm -rf ~/": "deny",
+          "rm -rf *": "deny",
+          "rm -rf ./*": "deny",
+          "dd if=": "deny",
+          "dd of=/dev/": "deny",
+          "mkfs*": "deny",
+          "shutdown*": "deny",
+          "reboot*": "deny",
+          "halt*": "deny",
+          "poweroff*": "deny",
+          ":(){:|:&};:": "deny",
+          ":(){:|:& }:": "deny",
+          ": { : | : & ; : } :": "deny",
+          ": { :|:& };": "deny",
+          "sudo rm -rf": "deny",
+          "sudo mkfs": "deny",
+          "sudo dd": "deny",
+          "sudo shutdown": "deny",
+          "sudo reboot": "deny",
+          "sudo halt": "deny",
+          "sudo poweroff": "deny",
+          "> /dev/sd": "deny",
+          ">> /dev/sd": "deny",
+          "> /dev/nvme": "deny",
+          ">> /dev/nvme": "deny",
+          "/dev/sd[a-z]": "deny",
+          "/dev/nvme[0-9]n[0-9]": "deny",
+          "mv /": "deny",
+          "mv /*": "deny",
+          "cp --remove-destination": "deny",
+          "truncate*": "deny",
+          ": > /": "deny",
+          ": > /*": "deny"
+        },
+        "read": {
+          "*": "allow",
+          "*.env": "allow",
+          "*.pem": "allow"
+        },
+        "write": "allow",
+        "edit": "allow",
+        "spawn": {
+          "*": "allow"
+        },
+        "webfetch": {
+          "*": "allow"
+        }
+      }
+    }
+  },
+  "enabledModels": [
+    "github-copilot/gpt-5.3-codex",
+    "Dartmouth/qwen.qwen3.5-122b",
+    "Dartmouth/anthropic.claude-opus-4-7",
+    "openrouter/google/gemma-4-31b-it:free",
+    "github-copilot/claude-haiku-4.5",
+    "openai-codex/gpt-5.5",
+    "Dartmouth/google.gemma-4-31B-it"
+  ],
+  "hideThinkingBlock": true
+}

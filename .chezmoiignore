@@ -1,2 +1,7 @@
 **/node_modules
 **/.opencode
+.pi/agent/auth.json
+.pi/agent/sessions/**
+.pi/agent/git/**
+.pi/agent/npm/**
+.pi/agent/*.bak
