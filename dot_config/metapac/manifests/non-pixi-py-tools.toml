@@ -1,0 +1,13 @@
+version = 1
+
+[pipx]
+packages = [
+  "graphify",
+  # "httpie==3.2.4",
+]
+
+[uv]
+tools = [
+  # "ruff==0.11.8",
+  # "basedpyright==1.26.0",
+]

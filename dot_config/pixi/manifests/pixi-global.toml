@@ -1,0 +1,31 @@
+version = 1
+
+[envs.generic]
+channels = ["conda-forge"]
+dependencies = { requests = "*" }
+
+[envs.marksman]
+channels = ["conda-forge"]
+dependencies = { marksman = "*" }
+exposed = { marksman = "marksman" }
+
+[envs.pyright]
+channels = ["conda-forge"]
+dependencies = { pyright = "*" }
+exposed = { pyright = "pyright", pyright-langserver = "pyright-langserver", pyright-python = "pyright-python", pyright-python-langserver = "pyright-python-langserver" }
+
+[envs.ty]
+channels = ["conda-forge"]
+dependencies = { ty = "*" }
+exposed = { ty = "ty" }
+
+[envs.datascience]
+channels = ["conda-forge"]
+dependencies = { numpy = "*", jupyter = "*", jupytext = "*", venn-abers = "*" , pdflatex = "*", seaborn = "*"  , ipython = "*", jupyter-book = "*" , texlive-core = "*" , pandoc = "*" , jupyterlab = "*" , requests = "*" , llm = "*" , nbdev = "*" }
+exposed = { f2py = "f2py", numpy-config = "numpy-config", ipython = "ipython" , jupyter-book = "jupyter-book" , jupyter = "jupyter", jupyterlab = "jupyter-lab", llm = "llm"}
+
+[envs.python]
+channels = ["conda-forge"]
+dependencies = { python = "3.12.*", numpy = "*", jupyter = "*", jupytext = "*", venn-abers = "*", pdflatex = "*", seaborn = "*", ipython = "*", jupyter-book = "*", texlive-core = "*", pandoc = "*", jupyterlab = "*", requests = "*" }
+exposed = { pixi-env-datascience = "python" }
+

@@ -1,0 +1,145 @@
+zypper = { packages = [
+  { name = "noctalia-shell", hooks = { before_install = [
+    "sh", "-c", "sudo zypper addrepo https://download.opensuse.org/repositories/home:Fisiu:apps/openSUSE_Tumbleweed/ home:Fisiu:apps && sudo zypper addrepo https://download.opensuse.org/repositories/home:ericfrs/openSUSE_Tumbleweed/ home:ericfrs && sudo zypper refresh"
+  ]}},
+  { name = "go", hooks = { after_install = [
+    "sh", "-c", "git clone https://github.com/dlvhdr/diffnav.git /tmp/diffnav && cd /tmp/diffnav && go install ."
+  ] } },
+  { name = "emacs", hooks = { after_install = [
+    "sh", "-c", "rm -rf ~/.emacs ~/.emacs.d && git clone --depth 1 https://github.com/doomemacs/core ~/.config/emacs && ~/.config/emacs/bin/doom install"
+  ] } },
+  "just",
+  "ShellCheck",
+  { name = "python314-uv", hooks = { after_install = [
+    # this is a hack to get pixi as well as uv - same vibe at least
+    "sh", "-c", "mkdir -p ~/.config/pixi/manifests && curl -fsSL https://pixi.sh/install.sh | sh"
+  ] } },
+  "fuzzel",
+  "wofi",
+  "watchexec",
+  "krb5-client",
+  "wl-clipboard",
+  "cliphist",
+  "xwayland-satellite",
+  "xwayland",
+  "adw-gtk3-theme",
+  { name = "nwg-look", hooks = { before_install = [
+    "sh", "-c", "sudo zypper addrepo https://download.opensuse.org/repositories/home:Cic17:External:nwg/openSUSE_Tumbleweed/ home:Cic17:External:nwg && sudo zypper refresh"
+  ] } },
+  { name = "qt6ct", hooks = { before_install = [
+    "sh", "-c", "sudo zypper addrepo https://download.opensuse.org/repositories/KDE:Qt6/openSUSE_Tumbleweed/ KDE:Qt6 && sudo zypper refresh"
+  ] } },
+  "7zip",
+  "GlobalProtect_rpm",
+  "Mesa",
+  "Mesa-demo-x",
+  "Mesa-dri",
+  "Mesa-libGL1",
+  "NetworkManager",
+  "atuin",
+  "btrfsprogs",
+  "cargo",
+  "chafa",
+  "distrobox",
+  "dosfstools",
+  "dracut",
+  "e2fsprogs",
+  "fd",
+  "ffmpegthumbnailer",
+  "firewalld",
+  "fzf",
+  "gdb",
+  "git",
+  "git-delta",
+  {name = "gh", hooks = {
+    after_install = ["gh", "extension", "install", "dlvhdr/gh-dash"]
+  }},
+  "glibc",
+  "globalprotect-openconnect",
+  # "zellij",
+  "kinit",
+  "helix",
+  "irqbalance",
+  "kernel-default",
+  "kexec-tools",
+  "kitty",
+  "libqt5-qtgraphicaleffects",
+  "libqt5-qtquickcontrols",
+  "libqt5-qtquickcontrols2",
+  "libqt5-qtwebengine",
+  "megasync",
+  "megasync-debuginfo",
+  "neovim",
+  "gvim",
+  "niri",
+  "numactl",
+  "openSUSE-release",
+  "patterns-base-base",
+  "patterns-base-enhanced_base",
+  "patterns-base-selinux",
+  "patterns-desktop-mobile",
+  "patterns-gnome-gnome",
+  "patterns-yast-x11_yast",
+  "patterns-yast-yast2_basis",
+  "ripgrep",
+  "rpm",
+  "sdbootutil",
+  "shim",
+  "snapper",
+  "stow",
+  "systemd-boot",
+  "tmux",
+  { name = "ruby", hooks = { after_install = [
+    "sh", "-c", "gem install tmuxinator"
+  ] } },
+  "tree",
+  "vivaldi-stable",
+  "xauth",
+  "xrdb",
+  "yazi",
+  "zoxide",
+  { name = "elan", hooks = { before_install = [
+    "sh", "-c", "sudo zypper addrepo https://download.opensuse.org/repositories/home:/nuklly/openSUSE_Tumbleweed/ home:nuklly && sudo zypper refresh"
+  ] } },
+  "lazygit",
+  "tig",
+  "discord",
+  "neowofetch"
+] }
+
+cargo = {
+  packages = [
+    "metapac",
+    "television",
+    "tmuxrs"
+  ]
+}
+
+npm = {
+  packages = [
+    "@bitwarden/cli",
+    "lefthook",
+    { name = "@earendil-works/pi-coding-agent",
+      hooks = {
+        before_sync = ["mkdir", "-p", "/home/thadryan/.local/lib/node_modules"]
+      }
+    },
+    "opencode-ai",
+    "@github/copilot",
+    "hunkdiff"
+  ]
+}
+
+flatpak = {
+    repos = [
+      { name = "system:flathub", options = { url = "https://dl.flathub.org/repo/" } },
+    ],
+    packages = [
+      { name = "system:org.ferdium.Ferdium", options = { remote = "flathub" } },
+      { name = "system:org.signal.Signal", options = { remote = "flathub" } },
+      { name = "system:org.asamk.SignalCli", options = { remote = "flathub" } },
+      { name = "system:com.spotify.Client", options = { remote = "flathub" } },
+#       { name = "system:org.gimp.GIMP", options = { remote = "flathub" } },
+      { name = "system:org.zotero.Zotero", options = { remote = "flathub" } },
+    ]
+}
