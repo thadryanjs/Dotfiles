@@ -1,0 +1,25 @@
+hostname_groups_enabled = true
+
+[hostname_groups]
+darlene = [
+    "bases/base-arch-gnome",
+    "darlene/arch/main",
+    "darlene/arch/unmanaged"
+]
+
+tyrell = [
+    "tyrell/debian-with-nix/main.toml",
+    "tyrell/debian-with-nix/unmanaged.toml"
+]
+
+[hostname_enabled_backends]
+darlene = ["arch", "cargo", "flatpak"]
+tyrell = ["apt", "cargo"]
+
+[arch]
+package_manager = "paru"
+
+[cargo]
+
+# [flatpak]
+# systemwide = true

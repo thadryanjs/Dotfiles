@@ -1,0 +1,16 @@
+[general]
+# no icons
+show=run
+# icons
+# show=drun
+normal_window=true
+allow_images=true
+key_expand=end
+image_size=64
+width=1200
+height=1200
+insensitive=true
+mode=drun,run
+columns=1
+padding:5
+lines=10

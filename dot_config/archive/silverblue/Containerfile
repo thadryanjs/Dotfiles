@@ -1,0 +1,67 @@
+FROM quay.io/fedora-ostree-desktops/silverblue:42
+ARG FEDORA_VER=42
+ENV FEDORA_VER=${FEDORA_VER}
+
+# Enable fusion repos
+RUN rpm-ostree install \
+  "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-${FEDORA_VER}.noarch.rpm" \
+  "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-${FEDORA_VER}.noarch.rpm"
+
+# Get COPR repos
+RUN curl -L https://copr.fedorainfracloud.org/coprs/lihaohong/yazi/repo/fedora-${FEDORA_VER}/lihaohong-yazi-fedora-${FEDORA_VER}.repo -o /etc/yum.repos.d/lihaohong-yazi-fedora-${FEDORA_VER}.repo
+
+RUN curl -L https://copr.fedorainfracloud.org/coprs/fcsm/tmuxinator/repo/fedora-${FEDORA_VER}/fcsm-tmuxinator-fedora-${FEDORA_VER}.repo -o /etc/yum.repos.d/fcsm-tmuxinator-fedora-${FEDORA_VER}.repo
+
+RUN curl -L https://copr.fedorainfracloud.org/coprs/mozes/zotero7/repo/fedora-${FEDORA_VER}/mozes-zotero7-fedora-${FEDORA_VER}.repo -o /etc/yum.repos.d/mozes-zotero7-fedora-${FEDORA_VER}.repo
+
+RUN curl -L https://copr.fedorainfracloud.org/coprs/claaj/typst/repo/fedora-${FEDORA_VER}/claaj-typst-fedora-${FEDORA_VER}.repo -o /etc/yum.repos.d/claaj-typst-fedora-${FEDORA_VER}.repo
+
+# Install packages
+RUN rpm-ostree install \
+    gnome-tweaks \
+    stow \
+    git \
+    tree \
+    openssl \
+    openssl-devel \
+    kitty \
+    distrobox \
+    openconnect \
+    cifs-utils \
+    vim-enhanced \
+    neovim \
+    xclip \
+    tmux \
+    fzf \
+    the_silver_searcher \
+    atuin \
+    # akmod-nvidia \
+    # xorg-x11-drv-nvidia-cuda \
+    # nvidia-settings \
+    # xorg-x11-drv-nvidia-cuda-libs \
+    # haven't tested these two r packages, the core one I layed, other gave errors
+    R-core \
+    # R-core-devel \
+    java-latest-openjdk \
+    sqlite \
+    yazi \
+    tmuxinator \
+    zotero \
+    gnome-pomodoro \
+    gnome-browser-connector \
+    texlive-xetex \
+    texlive-collection-latexextra \
+    pandoc
+    # texlive \
+    # texlive-psnfss \
+    # texlive-ec \
+    # texlive-lm \
+
+
+# To complete setup run the following after syncing dotfiles with stow
+# gnome tweaks: v-shell, system-tray-reloaded (needed for megasync)
+# sh ~/.scripts/distro/fedora/megasync-install-on-fedora.sh
+# sh ~/.scripts/apps/spotify/manage-flatpaks.sh
+# sh ~/.scripts/apps/gnome/gnome-tweak-settings.sh
+# sh ~/.scripts/installers/pixi-install.sh
+# sh ~/.scripts/apps/spotify/spotify-discord-bridge.sh

@@ -1,0 +1,52 @@
+apt = { packages = [
+  "atuin",
+  "bash",
+  "bsdutils",
+  "cargo",
+  "dash",
+  "diffutils",
+  "dist",
+  "efibootmgr",
+  "findutils",
+  "fzf",
+  "grep",
+  "grub-efi-amd64",
+  "grub-efi-amd64-signed",
+  "gzip",
+  "hostname",
+  "init",
+  "kitty",
+  "language-pack-en",
+  "linux-generic",
+  "ncurses-base",
+  "ncurses-bin",
+  "neovim",
+  "python3",
+  "shim-signed",
+  "stow",
+  "tmux",
+  "tree",
+  "ubuntu-minimal",
+  "ubuntu-restricted-addons",
+  "ubuntu-standard",
+  "ubuntustudio-audio",
+  "ubuntustudio-desktop-core",
+  "wamerican",
+  "wbritish",
+  "wpasupplicant",
+]}
+
+
+# this still checks for them again
+[flatpak]
+repos = [
+  { name = "system:flathub", options = { url = "https://dl.flathub.org/repo/" } },
+]
+packages = [
+  { name = "system:spotify", options = { remote = "flathub" } },
+  { name = "system:vivaldi", options = { remote = "flathub" } },
+  { name = "system:com.discordapp.Discord", options = { remote = "flathub" } },
+  { name = "system:ferdium", options = { remote = "flathub" } },
+  { name = "system:firefox", options = { remote = "flathub" } },
+  { name = "system:signal", options = { remote = "flathub" } },
+]

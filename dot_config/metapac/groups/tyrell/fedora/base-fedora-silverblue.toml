@@ -1,0 +1,14 @@
+[flatpak]
+repos = [
+  { name = "system:flathub", options = { url = "https://dl.flathub.org/repo/" } },
+]
+packages = [
+  { name = "system:com.discordapp.Discord", options = { remote = "flathub" } },
+  { name = "system:org.ferdium.Ferdium", options = { remote = "flathub" } },
+  { name = "system:org.mozilla.firefox", options = { remote = "flathub" } },
+  { name = "system:org.signal.Signal", options = { remote = "flathub" } },
+  { name = "system:org.asamk.SignalCli", options = { remote = "flathub" } },
+  # { name = "system:com.spotify.Client", options = { remote = "flathub" } },
+  # { name = "system:com.vivaldi.Vivaldi", options = { remote = "flathub" } },
+  { name = "system:org.gimp.GIMP", options = { remote = "flathub" } },
+]

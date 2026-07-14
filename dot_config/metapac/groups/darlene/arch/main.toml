@@ -1,0 +1,84 @@
+arch = { packages = [
+  "cifs-utils",
+  "openconnect",
+  "globalprotect-openconnect",
+  # "linux-lts",
+  # "linux-lts-headers",
+  "rsync",
+  # "adb",
+  "android-tools",
+  # "gnome-shell-pomodoro",
+  "watchexec",
+  "vivaldi",
+  "qutebrowser",
+  "pipewire-alsa",
+  "sway",
+  "xorg-xwayland",
+  "wofi",
+  "wl-clipboard",
+  "niri",
+  "noctalia-shell",
+  # "dms",
+  "cliphist",
+  "adw-gtk-theme",
+  "nwg-look",
+  "qt6ct",
+  "fuzzel",
+  "xwayland-satellite",
+  "bfg",
+  # "mupdf",
+  # "zathura",
+  "pandoc-cli",
+  # "wezterm",
+  # "helix",
+  "chromium",
+  "texlive-xetex",
+  "texlive-binextra",
+  "texlive-latexextra",
+  "texlive-fontsrecommended",
+  "texlive-mathscience",
+  "texlive-plaingeneric",
+  # "gh-dash", # awesome but don't need currently, leaving it here for future reference
+  "tig",
+  "diffnav",
+  "unionfs-fuse",
+  "emacs",
+  { name = "pi-coding-agent", hooks = { after_install = [
+    "pi install git:github.com/MasuRii/pi-tool-display"
+  ]}},
+  "opencode-bin",
+  # "github-copilot-cli",
+  # "claude-desktop-native",
+  # "claude-code",
+  # "ollama",
+  # "zoom",
+  "go",
+  "bun",
+  "h-m-m-git","php","argon2",
+  { name = "python-pipx", hooks = { after_install = [
+    "pipx",
+    "install",
+    "openviking",
+    "--force"
+  ]}},
+  { name = "rust", hooks = { after_install = [
+    "curl",
+    "-fsSL",
+    "https://raw.githubusercontent.com/volcengine/OpenViking/main/crates/ov_cli/install.sh",
+    "|",
+     "bash"
+  ]}},
+]}
+
+[flatpak]
+repos = [
+  { name = "system:flathub", options = { url = "https://dl.flathub.org/repo/" } },
+]
+packages = [
+  { name = "system:org.zotero.Zotero", options = { remote = "flathub" }, hooks = { after_install = [
+      "flatpak install --system -y flathub org.gtk.Gtk3theme.adw-gtk3",
+      "flatpak install --system -y flathub org.gtk.Gtk3theme.adw-gtk3-dark"
+  ]}},
+  { name = "system:org.libreoffice.LibreOffice", options = { remote = "flathub" } },
+  { name = "system:com.github.tchx84.Flatseal", options = { remote = "flathub" } },
+]

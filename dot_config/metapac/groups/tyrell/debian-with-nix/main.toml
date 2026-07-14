@@ -1,0 +1,30 @@
+apt = {
+    packages = [
+        "kitty",
+        "flatpak",
+        "python3.13-venv",
+        "cifs-utils",
+        # this is installed from a .deb and listed here so metapac clean doesn't erase it
+        # for the initial sync it might need to commented out becuse it's not a list deb package
+        "globalprotect-openconnect",
+        # could do here or nix
+        "atuin",
+        "fzf",
+        "stow",
+        "ripgrep",
+        "silversearcher-ag",
+        "fd-find",
+        "bat",
+        "tree",
+        "cargo",
+        "tmux",
+        "tmuxinator",
+        "zoxide"
+    ]
+}
+
+cargo = {
+    packages = [
+        "metapac",
+    ]
+}

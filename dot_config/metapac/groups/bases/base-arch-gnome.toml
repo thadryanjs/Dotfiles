@@ -1,0 +1,75 @@
+arch = { packages = [
+  "git",
+  "stow",
+  "neovim",
+  "kitty",
+  "tmux",
+  { name = "tmuxinator", hooks = { after_install = [
+    "wget",
+    "https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.bash",
+    "-O",
+    "/etc/bash_completion.d/tmuxinator.bash"
+  ]}},
+  "fzf",
+  "fd",
+  "less",
+  "bat",
+  { name = "television", hooks = { after_install = [
+      "echo 'eval \"$(tv init bash)\"' >> ~/.bashrc"
+  ]}},
+  "the_silver_searcher",
+  "ripgrep",
+  "atuin",
+  "tree",
+  "yazi",
+  "gvim",
+  "xclip",
+  "pixi",
+  "zoxide",
+  "gthumb",
+  # "r",
+  { name = "r", hooks = { after_install = [
+      "R -e \"install.packages('languageserver', repos='http://cran.r-project.org')\""
+  ]}},
+  "neofetch",
+  "fuse2",
+  "grub-customizer",
+  "btrfs-assistant",
+  "megasync",
+  "paru",
+  "fwupd",
+  "xorg-xrandr",
+  "gnome-browser-connector",
+  "vlc",
+  "usbutils",
+  "bluez",
+  "jdk-openjdk",
+  "pacman-contrib",
+  # "vivaldi",
+  # niri doesn't like flatpaks and I still use this in "focus mode"
+  "spotify",
+  { name = "bluez-utils", hooks = { after_install = [
+      "sudo systemctl enable bluetooth.service",
+      "&&",
+      "sudo systemctl start bluetooth.service",
+  ]}},
+  { name = "yarn", hooks = { after_install = [
+      "cd", "~/.local/share/nvim/lazy/markdown-preview.nvim",
+      "&&", "yarn", "add", "tslib"
+  ]}}
+]}
+
+[flatpak]
+repos = [
+  { name = "system:flathub", options = { url = "https://dl.flathub.org/repo/" } },
+]
+packages = [
+  { name = "system:com.discordapp.Discord", options = { remote = "flathub" } },
+  { name = "system:org.ferdium.Ferdium", options = { remote = "flathub" } },
+  { name = "system:org.mozilla.firefox", options = { remote = "flathub" } },
+  { name = "system:org.signal.Signal", options = { remote = "flathub" } },
+  { name = "system:org.asamk.SignalCli", options = { remote = "flathub" } },
+  # { name = "system:com.spotify.Client", options = { remote = "flathub" } },
+  # { name = "system:com.vivaldi.Vivaldi", options = { remote = "flathub" } },
+  { name = "system:org.gimp.GIMP", options = { remote = "flathub" } },
+]

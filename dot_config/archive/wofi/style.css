@@ -1,0 +1,53 @@
+window {
+    background-color: rgba(40, 42, 54, 0.5);
+}
+
+#input {
+    border: none;
+    background-color: rgba(68, 71, 90, 0.5); /* 50% opacity */
+    color: grey;
+    font-size: 30px;
+}
+
+#inner-box {
+    margin: 5px;
+    border: none;
+    background-color: rgba(40, 42, 54, 0.5);
+    font-size: 30px;
+}
+
+#outer-box {
+    margin: 5px;
+    background-color: rgba(40, 42, 54, 0.5);
+    border-radius: 5px;
+}
+
+#scroll {
+    margin: 0px;
+    border: none;
+}
+
+#text {
+    margin: 2.5px;
+    border: none;
+    color: rgba(191, 160, 199, 0.5); /* 50% transparent text color */
+    font-family: "DejaVuSansM Nerd Font Mono";
+}
+
+#entry.activatable #text {
+    color: rgba(40, 42, 54, 1); /* Fully opaque */
+}
+
+#entry > * {
+    /* Style for all child elements of entry */
+    color: rgba(248, 248, 242, 1); /* Fully opaque */
+}
+
+#entry:selected {
+    background-color: rgba(100, 50, 200, 0.5); /* Slightly less bright purple with some transparency */
+}
+
+#entry:selected #text {
+    font-weight: bold;
+    color: rgba(220, 220, 220, 1); /* Light gray text color for contrast */
+}

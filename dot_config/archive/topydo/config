@@ -1,0 +1,15 @@
+[topydo]
+identifiers = text
+filename = ~/WorkVault/todo.txt
+# archive_filename=~/WorkVault/done.txt
+archive_filename =
+
+[colorscheme]
+focus_background_color = black
+
+[edit]
+editor = nvim
+
+[column_keymap]
+D = cmd del {}
+d =
