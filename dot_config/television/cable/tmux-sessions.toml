@@ -1,0 +1,14 @@
+[metadata]
+name = "tmux-sessions"
+requirements = ["tmux"]
+
+[source]
+command = "tmux list-sessions"
+
+[keybindings]
+enter = "actions:attach"
+
+[actions.attach]
+description = "Attach to the selected session"
+command = "tmux attach-session -t '{split::0}'"
+mode = "execute"

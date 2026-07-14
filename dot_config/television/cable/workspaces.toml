@@ -1,0 +1,20 @@
+[metadata]
+name = "workspaces"
+description = "Browse and open workspaces with nvim"
+
+[source]
+command = "awk -F'\\0' 'NF>=2 {print $1 \"\\t\" $2}' ~/.dotfiles/.workspaces.txt | sort -f"
+display = "{split:\\t:0}"
+output = "{split:\\t:0}"
+
+[preview]
+command = "echo 'Path: {split:\\t:1}'"
+
+[keybindings]
+enter = "actions:open"
+ctrl-o = "actions:open"
+
+[actions.open]
+description = "Open workspace in nvim"
+command = "cd \"{split:\\t:1}\" && nvim"
+mode = "execute"

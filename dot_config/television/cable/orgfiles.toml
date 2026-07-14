@@ -1,0 +1,21 @@
+[metadata]
+name = "orgfiles"
+description = "Browse and edit org files in Knowledge and Home vaults"
+requirements = ["find", "nvim"]
+
+[source]
+command = "find /home/thadryan/Vaults/Knowledge /home/thadryan/Vaults/Home -name \"*.org\" -type f 2>/dev/null | sort -f"
+display = "{split:/:-2}/{split:/:-1}"
+output = "{}"
+
+[preview]
+command = "head -n 20 '{}'"
+
+[keybindings]
+enter = "actions:edit"
+ctrl-e = "actions:edit"
+
+[actions.edit]
+description = "Edit org file in nvim"
+command = "nvim '{}'"
+mode = "execute"

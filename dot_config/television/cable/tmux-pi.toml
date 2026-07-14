@@ -1,0 +1,21 @@
+[metadata]
+name = "tmux-pi"
+description = "List tmux sessions - Enter to attach, Ctrl-P for pi"
+requirements = ["tmux"]
+
+[source]
+command = "tmux list-sessions -F '#{session_name}'"
+output = "{}"
+
+[keybindings]
+ctrl-p = "actions:spawn-pi"
+
+[actions.attach]
+description = "Attach to session"
+command = "tmux attach-session -t '{}'"
+mode = "execute"
+
+[actions.spawn-pi]
+description = "Spawn pi session"
+command = "bash -c 'SESSION=\"{}\"; if tmux has-session -t \"${SESSION}-pi\" 2>/dev/null; then tmux attach-session -t \"${SESSION}-pi\"; else tmux new-session -d -s \"${SESSION}-pi\" && tmux send-keys -t \"${SESSION}-pi\" \"pi\" C-m && tmux attach-session -t \"${SESSION}-pi\"; fi'"
+mode = "execute"

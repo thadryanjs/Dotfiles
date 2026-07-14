@@ -1,0 +1,16 @@
+[metadata]
+name = "org-projects"
+description = "Find and open org files in Knowledge vault"
+requirements = ["fd", "nvim"]
+
+[source]
+command = "fd --extension org --absolute-path --base-directory $HOME/Vaults/Knowledge"
+output = "{}"
+
+[keybindings]
+enter = "actions:open"
+
+[actions.open]
+description = "Open org file in nvim"
+command = "nvim '{}'"
+mode = "execute"
