@@ -1,0 +1,8 @@
+default-timeout=5000
+background-color=#111411
+text-color=#85d993
+border-color=#85d993
+ignore-timeout=1
+
+[app-name="Vivaldi"]
+default-timeout=5000
