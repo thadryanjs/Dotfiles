@@ -5,3 +5,4 @@
 .pi/agent/git/**
 .pi/agent/npm/**
 .pi/agent/*.bak
+dotfiles.toml
