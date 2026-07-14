@@ -24,3 +24,4 @@ vim.cmd("colorscheme moon")
 --     end
 --     original_notify(msg, ...)
 -- end
+
