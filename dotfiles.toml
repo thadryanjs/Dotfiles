@@ -13,92 +13,92 @@
 
 [shell]
 paths = [
-  "~/.bashrc",
-  "~/.bash-preexec.sh",
-  "~/.profile",
-  "~/.inputrc",
-  "~/.condarc",
+    "~/.bashrc",
+    "~/.bash-preexec.sh",
+    "~/.profile",
+    "~/.inputrc",
+    "~/.condarc",
 ]
 
 [editors]
 paths = [
-  "~/.config/nvim",
-  "~/.config/doom",
-  "~/.vimrc",
-  "~/.vim",
-  "~/.wezterm.lua",
+    "~/.config/nvim",
+    "~/.config/doom",
+    "~/.vimrc",
+    "~/.vim",
+    "~/.wezterm.lua",
 ]
 
 [terminal_multiplexer]
 paths = [
-  "~/.config/kitty",
-  "~/.tmux.conf",
-  "~/.config/tmux",
-  "~/.config/tmuxinator",
-  "~/.distrobox.ini",
+    "~/.config/kitty",
+    "~/.tmux.conf",
+    "~/.config/tmux",
+    "~/.config/tmuxinator",
+    "~/.distrobox.ini",
 ]
 
 [shell_tools]
 paths = [
-  "~/.config/television",
-  "~/.config/yazi",
-  "~/.config/atuin",
-  "~/.config/h-m-m",
-  "~/.todo.cfg",
-  "~/.todo.actions.d",
+    "~/.config/television",
+    "~/.config/yazi",
+    "~/.config/atuin",
+    "~/.config/h-m-m",
+    "~/.todo.cfg",
+    "~/.todo.actions.d",
 ]
 
 [ai_agents]
 paths = [
-  "~/.pi/agent/settings.json",
-  "~/.pi/agent/keybindings.json",
-  "~/.pi/agent/models.json",
-  "~/.pi/agent/trust.json",
-  "~/.pi/agent/skills",
-  "~/.pi/dartmouth-models.md",
-  "~/.pi/readme.md",
-  "~/.config/opencode",
+    "~/.pi/agent/settings.json",
+    "~/.pi/agent/keybindings.json",
+    "~/.pi/agent/models.json",
+    "~/.pi/agent/trust.json",
+    "~/.pi/agent/skills",
+    "~/.pi/dartmouth-models.md",
+    "~/.pi/readme.md",
+    "~/.config/opencode",
 ]
 
 [desktop]
 paths = [
-  "~/.config/niri",
-  "~/.config/fuzzel",
-  "~/.config/mako",
-  "~/.config/noctalia",
-  "~/.config/gtk-3.0",
-  "~/.config/gtk-4.0",
-  "~/.config/qt5ct",
-  "~/.config/qt6ct",
-  "~/.config/mimeapps.list",
-  "~/debian-kde-niri-like.kksrc",
+    "~/.config/niri",
+    "~/.config/fuzzel",
+    "~/.config/mako",
+    "~/.config/noctalia",
+    "~/.config/gtk-3.0",
+    "~/.config/gtk-4.0",
+    "~/.config/qt5ct",
+    "~/.config/qt6ct",
+    "~/.config/mimeapps.list",
+    "~/debian-kde-niri-like.kksrc",
 ]
 
 [browser]
 paths = [
-  "~/.config/qutebrowser",
+    "~/.config/qutebrowser",
 ]
 
 [package_management]
 paths = [
-  "~/.config/metapac",
-  "~/.config/misc",
-  "~/.config/pixi",
-  "~/.config/home-manager",
+    "~/.config/metapac",
+    "~/.config/misc",
+    "~/.config/pixi",
+    "~/.config/home-manager",
 ]
 
 [dev]
 paths = [
-  "~/.config/tex",
-  "~/.dsci-mmamba-env.yaml",
+    "~/.config/tex",
+    "~/.dsci-mmamba-env.yaml",
 ]
 
 [archive]
 paths = [
-  "~/.config/archive",
+    "~/.config/archive",
 ]
 
 [machine_notes]
 paths = [
-  "~/.config/darlene-arch.md",
+    "~/.config/darlene-arch.md",
 ]

@@ -1,14 +1,47 @@
+-- lua/plugins/lsp-and-completion/nvim-lspconfig.lua
+--
+-- LSP servers ONLY. This file no longer touches completion behaviour --
+-- coq_nvim is the single completion engine now.
+--
+-- Two changes from before:
+--   1. The `LspAttach` + `vim.lsp.completion.enable` block is GONE. Running
+--      native completion alongside coq was the two-engines-fighting problem.
+--   2. coq's capabilities are injected into every server via the "*" config,
+--      so LSP-sourced completions flow through coq's popup.
+
 return {
   "neovim/nvim-lspconfig",
+  dependencies = { "ms-jpq/coq_nvim" }, -- ensure coq is available when we read its capabilities
   config = function()
     vim.lsp.log.set_level("WARN")
-    -- Configure each server
+
+    -- Give every server coq's completion capabilities.
+    -- If `require("coq")` errors here (version mismatch), comment this block
+    -- out -- path completion still works without it, LSP completions may look
+    -- slightly thinner.
+    local ok, coq = pcall(require, "coq")
+    if ok and coq.lsp_ensure_capabilities then
+      vim.lsp.config("*", {
+        capabilities = coq.lsp_ensure_capabilities().capabilities,
+      })
+    end
+
+    -- Per-server config
     vim.lsp.config("pyright", {
       flags = { debounce_text_changes = 300 },
-      -- your options
+      root_dir = function(bufnr, on_dir)
+        local fname = vim.api.nvim_buf_get_name(bufnr)
+        local markers = {
+          "pyrightconfig.json", "pyproject.toml", "setup.py",
+          "setup.cfg", "requirements.txt", "Pipfile", ".git",
+        }
+        -- walk up from the file looking for a project marker
+        local found = vim.fs.root(bufnr, markers)
+        -- fall back to the file's own directory instead of leaving root = nil
+        on_dir(found or vim.fs.dirname(fname))
+      end,
     })
     vim.lsp.config("lua_ls", {
-      -- settings = { ... },
       flags = { debounce_text_changes = 300 },
     })
     vim.lsp.config("r_language_server", {
@@ -39,7 +72,8 @@ return {
       flags = { debounce_text_changes = 300 },
     })
     vim.lsp.config("jdtls", { flags = { debounce_text_changes = 300 } })
-    -- Enable all valid servers
+
+    -- Enable servers
     vim.lsp.enable({
       "pyright",
       "lua_ls",
@@ -49,18 +83,9 @@ return {
       -- "clangd",
       -- "gopls",
       "jdtls",
-      -- Remove or add more as needed, only if config exists
     })
 
-    -- native LSP auto-completion (replaces coq)
-    vim.api.nvim_create_autocmd("LspAttach", {
-      callback = function(ev)
-        local client = vim.lsp.get_client_by_id(ev.data.client_id)
-        if client and client:supports_method("textDocument/completion") then
-          vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
-        end
-      end,
-    })
+    -- NOTE: the old native-completion autocmd was removed on purpose.
+    -- coq_nvim handles all completion now (see coqnvim.lua).
   end,
 }
-
