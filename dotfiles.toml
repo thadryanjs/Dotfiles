@@ -10,6 +10,13 @@
 #   - tracked but NOT listed here  -> chezmoi forget
 # Entries are COARSE: a directory covers everything under it.
 # =============================================================================
+# files/patterns to exclude even though their parent dir is tracked
+[exclude]
+paths = [
+    "~/.config/noctalia/colors.json",
+    "~/.config/noctalia/settings.json",
+    "~/.config/qt6ct/colors/noctalia.conf"
+]
 
 [shell]
 paths = [

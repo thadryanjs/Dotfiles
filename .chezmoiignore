@@ -6,3 +6,9 @@
 .pi/agent/npm/**
 .pi/agent/*.bak
 dotfiles.toml
+
+# >>> generated from dotfiles.toml [exclude] — do not edit below >>>
+.config/noctalia/colors.json
+.config/noctalia/settings.json
+.config/qt6ct/colors/noctalia.conf
+# <<< end generated <<<

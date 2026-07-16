@@ -87,6 +87,8 @@ alias tv-tmux='tv tmux-sessions'
 alias tv-tmuxinator='tv tmuxinator'
 alias fproj="source ~/Vaults/Projects/Tools/Scripts/Apps/Fzf/fzf-org-projects.sh"
 alias cdf="source ~/Vaults/Projects/Tools/Scripts/Apps/Fzf/fzf-org-dirs.sh"
+alias fdf="source ~/Vaults/Projects/Tools/Scripts/Apps/Fzf/fzf-dir-search.sh"
+alias cma="python ~/Vaults/Projects/Tools/Scripts/Maintenance/sync-manifest.py --apply"
 
 alias focusmode="sh ~/Vaults/Projects/Tools/Scripts/Tools/focus-mode.sh"
 
@@ -247,6 +249,18 @@ fzf_tree() {
     fzf --tmux --preview 'tree -C {}'
 }
 bind -x '"\C-e": fzf_tree'
+
+# custom dir search
+fzf_dir_search() {
+    local selected
+    selected=$(fd --type d --hidden --exclude .git | fzf --tmux --prompt="Find directory: " --height=40%)
+    if [ -n "$selected" ] && [ -d "$selected" ]; then
+        cd "$selected" && ls
+    fi
+}
+bind -r '"\C-t"'
+bind -x '"\C-t": fzf_dir_search'
+
 
 # custom ripgrep search (this fails on empty dir or only dotfiles)
 fzf_ripgrep() {
