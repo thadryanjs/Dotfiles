@@ -90,7 +90,7 @@ zypper = { packages = [
   "systemd-boot",
   "tmux",
   { name = "ruby", hooks = { after_install = [
-    "sh", "-c", "gem install tmuxinator"
+    "sh", "-c", "gem install tmuxinator && mkdir -p ~/.local/share/bash-completion/completions && curl -fsSL https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.bash -o ~/.local/share/bash-completion/completions/tmuxinator"
   ] } },
   "tree",
   "vivaldi-stable",

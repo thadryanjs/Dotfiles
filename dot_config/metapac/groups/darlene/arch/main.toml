@@ -59,6 +59,10 @@ arch = { packages = [
   "gh-dash",
   "git-filter-repo",
   "github-copilot-cli",
+  { name = "tmuxinator", hooks = { after_install = [
+    "mkdir -p ~/.local/share/bash-completion/completions",
+    "curl -fsSL https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.bash -o ~/.local/share/bash-completion/completions/tmuxinator"
+  ]}},
   "just",
   "lazygit",
   "lefthook",

@@ -302,12 +302,10 @@ export PATH="$PATH:/home/thadryan/.local/bin"
 export PATH="$PATH:/home/thadryan/.cargo/bin"
 export PATH="$HOME/.config/emacs/bin:$PATH"
 
-if [ -f /etc/bash_completion.d/tmuxinator.bash ]; then
-    source /etc/bash_completion.d/tmuxinator.bash
-fi
-
-if [ -f ~/.bash_completion.d/tmuxinator.bash ]; then
-    source ~/.bash_completion.d/tmuxinator.bash
+# Tmuxinator completions
+if [ -f ~/.local/share/bash-completion/completions/tmuxinator ]; then
+    source ~/.local/share/bash-completion/completions/tmuxinator
+    complete -F _tmuxinator tmi
 fi
 
 # Kill tmux session by name

@@ -4,12 +4,6 @@ arch = { packages = [
   "neovim",
   "kitty",
   "tmux",
-  { name = "tmuxinator", hooks = { after_install = [
-    "wget",
-    "https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.bash",
-    "-O",
-    "/etc/bash_completion.d/tmuxinator.bash"
-  ]}},
   "fzf",
   "fd",
   "less",
