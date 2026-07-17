@@ -7,3 +7,7 @@ windows:
         - sh ~/Vaults/Projects/Tools/Scripts/Dartmouth/VPN/vpn.sh
         - read -p "Press enter to continue..." ; sh ~/Vaults/Projects/Tools/Scripts/Dartmouth/Auth/dartmouth-kinit.sh
         - read -p "Press enter to continue..." ; dartfs
+        - dartfs
+  - dartfs:
+      panes:
+        - dartfs

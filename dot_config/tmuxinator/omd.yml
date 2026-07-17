@@ -11,7 +11,8 @@ windows:
       panes:
         - bash
   - server:
-      layout: main-vertical
       panes:
         - bash -c "cd /mnt/Workspace/TheoryProject/OMD && nvim -R -c 'set nomodifiable'; exec bash"
         - bash -c "cd /mnt/Workspace/TheoryProject/OMD && exec bash"
+      commands:
+        - tmux resize-pane -t 0 -x 66%

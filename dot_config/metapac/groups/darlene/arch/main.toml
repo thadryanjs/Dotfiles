@@ -6,8 +6,8 @@ arch = { packages = [
   # "linux-lts-headers",
   "rsync",
   # "adb",
-  "android-tools",
   # "gnome-shell-pomodoro",
+  "android-tools",
   "watchexec",
   "vivaldi",
   "qutebrowser",
@@ -40,6 +40,7 @@ arch = { packages = [
   "texlive-plaingeneric",
   # "gh-dash", # awesome but don't need currently, leaving it here for future reference
   "tig",
+  "hunk-bin",
   "diffnav",
   "unionfs-fuse",
   "emacs",

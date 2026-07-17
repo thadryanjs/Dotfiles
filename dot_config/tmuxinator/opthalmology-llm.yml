@@ -3,7 +3,10 @@ root: /home/thadryan/Vaults/Projects/Work/Primary/RCD/OpthalmologyLLM/Code
 windows:
   - code:
       panes:
-        - bash -c "nvim; exec bash"
+        - bash -c "uv run nvim; exec bash"
+        - bash
+      commands:
+        - tmux resize-pane -t 0 -x 66%
   - git:
       panes:
         - bash -c "lazygit; exec bash"
@@ -11,7 +14,8 @@ windows:
       panes:
         - bash
   - server:
-      layout: main-vertical
       panes:
-        - bash -c "cd /mnt/Workspace/RCD/OpthalmologyLLM && nvim -R -c 'set nomodifiable'; exec bash"
-        - bash -c "cd /mnt/Workspace/RCD/OpthalmologyLLM && exec bash"
+        - bash -c "cd /mnt/Workspace/OpthalmologyLLM && uv run nvim -R -c 'set nomodifiable'; exec bash"
+        - bash -c "cd /mnt/Workspace/OpthalmologyLLM && exec bash"
+      commands:
+        - tmux resize-pane -t 0 -x 66%

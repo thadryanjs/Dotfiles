@@ -2,10 +2,11 @@ name: config
 root: ~/Vaults/Projects/Dotfiles
 windows:
   - code:
-      layout: main-vertical
       panes:
         - bash -c "nvim; exec bash"
         - bash
+      commands:
+        - tmux resize-pane -t 0 -x 66%
   - git:
       panes:
         - bash -c "lazygit; exec bash"

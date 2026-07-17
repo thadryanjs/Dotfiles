@@ -1,5 +1,6 @@
 # =============================================================================
 # dotfiles.toml — the declarative manifest of what chezmoi tracks.
+# Test edit for diff viewer
 #
 # THIS FILE IS THE SOURCE OF TRUTH. Edit it, then run the sync script:
 #     sync-manifest.py            # dry-run: shows what WOULD change

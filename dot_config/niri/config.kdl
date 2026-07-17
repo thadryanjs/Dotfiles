@@ -656,7 +656,7 @@ gestures {
 
 environment {
   QT_QPA_PLATFORMTHEME "qt6ct"
-  GTK_THEME "adwaita-dark"
+  // GTK_THEME "adwaita-dark"
 }
 
 // general - organzation, coms
