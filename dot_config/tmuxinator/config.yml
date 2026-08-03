@@ -2,6 +2,7 @@ name: config
 root: ~/Vaults/Projects/Dotfiles
 windows:
   - code:
+      layout: main-vertical
       panes:
         - bash -c "nvim; exec bash"
         - bash

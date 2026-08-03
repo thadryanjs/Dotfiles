@@ -2,15 +2,24 @@ name: ilp
 root: /home/thadryan/Vaults/Projects/Work/Primary/TheoryProject/ILP
 windows:
   - code:
+      layout: main-vertical
       panes:
         - bash -c "nvim; exec bash"
+        - bash
+      commands:
+        - tmux resize-pane -t 0 -x 66%
   - git:
+      layout: main-vertical
       panes:
         - bash -c "lazygit; exec bash"
+        - bash -c "cd general/Manuscript && lazygit; exec bash"
+      commands:
+        - tmux resize-pane -t 0 -x 66%
   - bash:
       panes:
         - bash
   - server:
+      layout: main-vertical
       panes:
         - bash -c "cd /mnt/Workspace/TheoryProject/ILP && nvim -R -c 'set nomodifiable'; exec bash"
         - bash -c "cd /mnt/Workspace/TheoryProject/ILP && exec bash"
