@@ -8,13 +8,12 @@ darlene = [
 ]
 
 tyrell = [
-    "tyrell/debian-with-nix/main.toml",
-    "tyrell/debian-with-nix/unmanaged.toml"
+    "bases/base-tumbleweed"
 ]
 
 [hostname_enabled_backends]
 darlene = ["arch", "cargo", "flatpak"]
-tyrell = ["apt", "cargo"]
+tyrell = ["zypper", "cargo", "npm"]
 
 [arch]
 package_manager = "paru"
