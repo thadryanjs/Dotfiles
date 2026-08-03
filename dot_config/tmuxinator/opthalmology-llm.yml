@@ -2,6 +2,7 @@ name: opthalmology-llm
 root: /home/thadryan/Vaults/Projects/Work/Primary/RCD/OpthalmologyLLM/Code
 windows:
   - code:
+      layout: main-vertical
       panes:
         - bash -c "uv run nvim; exec bash"
         - bash
@@ -14,8 +15,9 @@ windows:
       panes:
         - bash
   - server:
+      layout: main-vertical
       panes:
-        - bash -c "cd /mnt/Workspace/OpthalmologyLLM && uv run nvim -R -c 'set nomodifiable'; exec bash"
+        - bash -c "cd /mnt/Workspace/OpthalmologyLLM && nvim -R -c 'set nomodifiable'; exec bash"
         - bash -c "cd /mnt/Workspace/OpthalmologyLLM && exec bash"
       commands:
         - tmux resize-pane -t 0 -x 66%
