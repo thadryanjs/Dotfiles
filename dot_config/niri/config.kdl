@@ -1,13 +1,13 @@
 // Make better use of super vs super+hjkl
 // Can I declare apps in a workspace? ie, have them start automatically
 
-spawn-at-startup "qs" "-c" "noctalia-shell" "--no-duplicate"
+spawn-sh-at-startup "export NIRI_SOCKET=$(ls /run/user/1000/niri.wayland-*.sock | head -n 1); qs -c noctalia-shell --no-duplicate"
 spawn-sh-at-startup "sleep 3 && (megasync &); sleep 1 && xdotool search --class megasync minimize || true"
 
 input {
     keyboard {
         xkb {
-            options "caps:escape,escape:swapcaps"
+            options "caps:swapescape"
         }
     }
 
@@ -357,17 +357,18 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Alt+Q hotkey-overlay-title="Open a Terminal: terminal" { spawn "kitty"; }
+    Alt+Q { spawn "kitty"; }
     // non-noctalia
     // Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
     Mod+D { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
+    Mod+Z { spawn "fuzzel"; }
 
-    Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
+    Super+Alt+L { spawn "swaylock"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
     // For example, this is a standard bind to toggle the screen reader (orca).
-    Super+Alt+S allow-when-locked=true hotkey-overlay-title=null { spawn-sh "pkill orca || exec orca"; }
+    Super+Alt+S allow-when-locked=true { spawn-sh "pkill orca || exec orca"; }
 
     // Example volume keys mappings for PipeWire & WirePlumber.
     // The allow-when-locked=true property makes them work even when the session is locked.

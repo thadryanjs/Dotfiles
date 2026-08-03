@@ -373,6 +373,7 @@
         "allowPasswordWithFprintd": false,
         "animationDisabled": false,
         "animationSpeed": 1,
+        "autoNetworkEnabled": true,
         "autoStartAuth": false,
         "avatarImage": "/home/thadryan/.face",
         "boxRadiusRatio": 1,
@@ -673,7 +674,7 @@
     },
     "wallpaper": {
         "automationEnabled": false,
-        "directory": "/home/thadryan/HomeVault/Areas/Art/Backgrounds",
+        "directory": "/home/thadryan/Pictures/Wallpapers",
         "enableMultiMonitorDirectories": false,
         "enabled": true,
         "favorites": [
