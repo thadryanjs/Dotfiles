@@ -50,9 +50,9 @@ pi()       { with_llm_keys command pi "$@"; }
 alias reboot="systemctl reboot"
 alias shutdown="sudo shutdown now"
 
-alias nvimconfig="cd ~/Vaults/Projects/Dotfiles/.config/nvim"
-alias dotfiles="cd ~/Vaults/Projects/Dotfiles"
-alias config="cd ~/Vaults/Projects/Dotfiles/.config"
+alias nvimconfig="cd /home/thadryan/Vaults/Projects/Dotfiles/dot_config/nvim"
+alias dotfiles="cd /home/thadryan/Vaults/Projects/Dotfiles"
+alias config="cd /home/thadryan/Vaults/Projects/Dotfiles/dot_config"
 
 alias restow="sh ~/Vaults/Projects/Tools/Scripts/Maintenance/stow-reverse-adopt.sh"
 

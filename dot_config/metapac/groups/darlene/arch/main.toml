@@ -41,6 +41,7 @@ arch = { packages = [
   "texlive-fontsrecommended",
   "texlive-mathscience",
   "texlive-plaingeneric",
+  "libmad",
   # "gh-dash", # awesome but don't need currently, leaving it here for future reference
   "tig",
   "hunk-bin",

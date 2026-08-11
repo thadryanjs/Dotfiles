@@ -3,7 +3,7 @@ return {
     -- commit = "6dc1b7fa0473048a1346e9f09b33a0253e494e06",
     config = function()
         vim.g.slime_cell_delimiter = "# %%"
-        vim.g.slime_target = "zellij"
+        vim.g.slime_target = "tmux"
         vim.g.slime_python_ipython = 0
 
         function ToggleSlimeIPython()
