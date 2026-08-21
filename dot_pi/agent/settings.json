@@ -35,32 +35,25 @@
     "rules": {},
     "profiles": {
       "standard": {
-        "*": "ask",
         "bash": {
-          "*": "ask",
+          "ls": "allow",
+          "pwd": "allow",
           "git status": "allow",
-          "git log": "allow",
-          "rm": "ask"
+          "git diff": "allow",
+          "*": "ask"
         },
         "read": {
           "*": "allow",
-          "*.env": "deny",
-          "*.pem": "deny"
+          "*.env": "allow",
+          "*.pem": "allow"
         },
-        "write": {
-          "*": "ask"
-        },
-        "edit": {
-          "*": "ask"
-        },
+        "write": "allow",
+        "edit": "allow",
         "spawn": {
-          "build": "allow",
-          "test": "allow",
-          "*": "deny"
+          "*": "ask"
         },
         "webfetch": {
-          "*": "ask",
-          "https://github.com/*": "allow"
+          "*": "allow"
         }
       },
       "safe": {

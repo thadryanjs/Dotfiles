@@ -1,0 +1,9 @@
+[Trigger]
+Operation = Upgrade
+Type = Package
+Target = qt6-base
+
+[Action]
+Description = Rebuilding noctalia-qs against new Qt6...
+When = PostTransaction
+Exec = /usr/bin/bash -c 'sudo -u thadryan /home/thadryan/Vaults/Projects/Tools/Scripts/rebuild-noctalia-qs.sh && pacman -U /home/thadryan/.cache/noctalia-qs-build/*.pkg.tar.zst'
