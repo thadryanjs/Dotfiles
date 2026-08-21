@@ -1,7 +1,7 @@
-name: dev-remote
-root: '.'
+name: pred-analysis
+root: /home/thadryan/Vaults/Projects/Home/PredAnalysis
 windows:
-  - code:
+  - local:
       layout: main-vertical
       panes:
         - bash -c "nvim; exec bash"
@@ -12,12 +12,7 @@ windows:
       panes:
         - bash -c "lazygit; exec bash"
   - bash:
-      panes:
-        - bash
-  - server:
       layout: main-vertical
       panes:
-        - bash -c "cd /mnt/Workspace && nvim -R -c 'set nomodifiable'; exec bash"
-        - bash -c "cd /mnt/Workspace && exec bash"
-      commands:
-        - tmux resize-pane -t 0 -x 80%
+        - bash
+        - bash

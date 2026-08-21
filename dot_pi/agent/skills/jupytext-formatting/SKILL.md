@@ -156,3 +156,15 @@ $$
 # x=1
 # $$
 ```
+
+General rules:
+    - Every time data is mutated, filtered, etc, show a before and after print in the notebook so it's traceable.
+    - There should be one cell per print, ie, if the cell prints something, cut it off there and make a new cell. This prevents confusion when ten things are printed at the bottom and you're trying to map output back to code. Even if there is not markdown cell between them it's fine - you get code-outout-code-output-code-output instead of code-code-code-output-output-output
+
+Exception: something like this counts as one print because it's organization for one piece of output:
+```
+print(f"Total matches in dataset: {df_raw.height}")
+print(f"\nGame mode breakdown:")
+print(df_raw.group_by("game_mode").agg(pl.len().alias("count")).sort("count", descending=True))
+
+```

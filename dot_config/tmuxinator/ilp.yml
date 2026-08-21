@@ -7,14 +7,14 @@ windows:
         - bash -c "nvim; exec bash"
         - bash
       commands:
-        - tmux resize-pane -t 0 -x 66%
+        - tmux resize-pane -t 0 -x 80%
   - git:
       layout: main-vertical
       panes:
         - bash -c "lazygit; exec bash"
         - bash -c "cd general/Manuscript && lazygit; exec bash"
       commands:
-        - tmux resize-pane -t 0 -x 66%
+        - tmux resize-pane -t 0 -x 80%
   - bash:
       panes:
         - bash
@@ -24,4 +24,4 @@ windows:
         - bash -c "cd /mnt/Workspace/TheoryProject/ILP && nvim -R -c 'set nomodifiable'; exec bash"
         - bash -c "cd /mnt/Workspace/TheoryProject/ILP && exec bash"
       commands:
-        - tmux resize-pane -t 0 -x 66%
+        - tmux resize-pane -t 0 -x 80%
