@@ -79,6 +79,7 @@ arch = { packages = [
   "go",
   "bun",
   "h-m-m-git","php","argon2",
+  "socat",
   { name = "python-pipx", hooks = { after_install = [
     "pipx",
     "install",

@@ -1,0 +1,28 @@
+name: dcd
+root: /home/thadryan/Vaults/Projects/Work/Primary/DCD
+windows:
+  - local:
+      layout: main-vertical
+      panes:
+        - bash -c "uv run nvim; exec bash"
+        - bash
+      commands:
+        - tmux resize-pane -t 0 -x 80%
+  - server:
+      layout: main-vertical
+      panes:
+        - bash -c "cd /mnt/Workspace/DCD && nvim -R -c 'set nomodifiable'; exec bash"
+        - bash -c "cd /mnt/Workspace/DCD && exec bash"
+      commands:
+        - tmux resize-pane -t 0 -x 80%
+  - git:
+      panes:
+        - bash -c "lazygit; exec bash"
+  - diff:
+      panes:
+        - bash -c "hunk diff; exec bash"
+  - bash:
+      layout: main-vertical
+      panes:
+        - bash
+        - bash

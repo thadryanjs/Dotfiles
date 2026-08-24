@@ -18,7 +18,10 @@
     "git:https://github.com/jdiamond/pi-guard",
     "git:https://github.com/nicobailon/pi-web-access",
     "git:https://github.com/tintinweb/pi-subagents",
-    "npm:pi-image-paste"
+    "npm:pi-image-paste",
+    "https://github.com/cmpadden/pi-diff-review",
+    "npm:@lpirito/pi-diffloop",
+    "npm:@aliou/pi-guardrails"
   ],
   "guard": {
     "enabled": true,

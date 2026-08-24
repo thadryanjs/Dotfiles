@@ -168,3 +168,8 @@ print(f"\nGame mode breakdown:")
 print(df_raw.group_by("game_mode").agg(pl.len().alias("count")).sort("count", descending=True))
 
 ```
+
+When I use this technique, I'm looking for a hyper-transparent report. Think of it like a math proof for code. Whenever we transform or filter the dataset, we head/tail whatever BEFORE AND AFTER so we see what's going on. PROVE EVERYTHING TO ME.
+
+This is a great example (it's in R but the philosophy is language-agnostic)
+https://www.tidymodels.org/start/case-study/
