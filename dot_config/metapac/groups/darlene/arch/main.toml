@@ -80,6 +80,7 @@ arch = { packages = [
   "bun",
   "h-m-m-git","php","argon2",
   "socat",
+  "bubblewrap",
   { name = "python-pipx", hooks = { after_install = [
     "pipx",
     "install",
