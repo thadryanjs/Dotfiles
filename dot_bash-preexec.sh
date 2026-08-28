@@ -371,6 +371,5 @@ __bp_install_after_session_init() {
 }
 
 # Run our install so long as we're not delaying it.
-if [[ -z "${__bp_delay_install:-}" ]]; then
-    __bp_install_after_session_init
-fi
+
+# goodbye world
