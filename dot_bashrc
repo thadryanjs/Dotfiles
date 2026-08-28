@@ -1,3 +1,4 @@
+# hello world
 test -s ~/.alias && . ~/.alias || true
 # hi
 stty -ixon
