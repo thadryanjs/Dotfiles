@@ -1,5 +1,5 @@
 name: dcd
-root: /home/thadryan/Vaults/Projects/Work/Primary/DCD
+root: /home/thadryan/Vaults/Projects/Work/Primary/DCD/Code
 windows:
   - local:
       layout: main-vertical

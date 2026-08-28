@@ -75,3 +75,6 @@ ln -s ~/.pi/agent/git/github.com/anthod0/pi-lab/packages/permissions ~/.pi/agent
 **Config:** `/home/thadryan/Vaults/Projects/Dotfiles/.config/niri/config.kdl`
 
 **Documentation:** `/home/thadryan/Vaults/Knowledge/Areas/Tooling/Niri/general.md`
+
+<!-- Hello World - Testing PR review strategies -->
+

@@ -35,6 +35,7 @@ arch = { packages = [
   # "wezterm",
   # "helix",
   "chromium",
+  "gcc-fortran",
   "texlive-xetex",
   "texlive-binextra",
   "texlive-latexextra",

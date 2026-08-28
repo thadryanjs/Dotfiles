@@ -118,13 +118,18 @@
   "permissionGate": {
     "autoDenyPatterns": [
       {
-        "pattern": "\\bgit\\s+(add|rm|mv|commit|push|pull|fetch|merge|rebase|reset|revert|checkout|switch|restore|branch|tag|stash|clean|cherry-pick|apply|am|clone|init|remote|config|gc|prune|reflog|filter-branch|update-ref|worktree|submodule|sparse-checkout)\\b",
-        "description": "Git write/state-changing command — agent may not run these",
+        "pattern": "\\bgit\\s+(rm|mv|push|pull|fetch|merge|rebase|reset|revert|checkout|switch|restore|branch|tag|stash|clean|cherry-pick|apply|am|clone|init|remote|config|gc|prune|reflog|filter-branch|update-ref|worktree|submodule|sparse-checkout)\\b",
+        "description": "Git state-changing command (except add/commit) — agent may not run these",
         "regex": true
       },
       {
         "pattern": "\\b(curl|wget)\\b[^|]*\\|\\s*(sudo\\s+)?(ba|z|da)?sh\\b",
         "description": "Pipe-to-shell (curl|wget ... | sh) — remote code execution",
+        "regex": true
+      },
+      {
+        "pattern": "rm\\s+.*\\.git",
+        "description": "Prevent deletion of .git directory",
         "regex": true
       },
       {
