@@ -76,7 +76,7 @@ git fetch && git checkout -b <task-name> origin/master
 whatever you were last on — usually the previous task's branch — and your PR
 will carry commits that don't belong to this task.
 
-Name the branch from the issue: `agent1-31-transparency-receipts`.
+Name the branch to match the primary file you are editing: `agent1-03_model.py`.
 
 ### 3. Read the spec
 

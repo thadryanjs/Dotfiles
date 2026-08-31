@@ -103,7 +103,7 @@ vim.cmd [[ filetype plugin on ]]
 vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
 
 -- python provider
-vim.g.python3_host_prog = '/usr/bin/python3'
+vim.g.python3_host_prog = vim.fn.expand('~/.local/share/nvim/venv/bin/python3')
 
 
 -- This is a hack because neotree messes with :bd

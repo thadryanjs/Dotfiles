@@ -78,6 +78,7 @@ arch = { packages = [
   "zellij",
   "go",
   "bun",
+  "tree-sitter-cli",
   "h-m-m-git","php","argon2",
   "socat",
   "bubblewrap",
