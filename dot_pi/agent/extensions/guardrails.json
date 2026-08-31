@@ -14,8 +14,8 @@
     "mode": "ask",
     "allowedPaths": [
       {
-        "kind": "file",
-        "path": "/dev/null"
+        "kind": "directory",
+        "path": "/home/thadryan/Vaults/Projects/Work/Primary/DCD"
       }
     ]
   },
@@ -118,8 +118,13 @@
   "permissionGate": {
     "autoDenyPatterns": [
       {
-        "pattern": "\\bgit\\s+(add|rm|mv|commit|push|pull|fetch|merge|rebase|reset|revert|checkout|switch|restore|branch|tag|stash|clean|cherry-pick|apply|am|clone|init|remote|config|gc|prune|reflog|filter-branch|update-ref|worktree|submodule|sparse-checkout)\\b",
-        "description": "Git write/state-changing command — agent may not run these",
+        "pattern": "\\b(pip|npm|yarn|pnpm|conda|uv)\\s+(install|add|update|upgrade)\\b",
+        "description": "Package installation — agents should not install dependencies",
+        "regex": true
+      },
+      {
+        "pattern": "\\b(curl|wget|nc|socat|ssh|scp|rsync)\\b",
+        "description": "General network tools — restricted to gh and git",
         "regex": true
       },
       {

@@ -1,20 +1,12 @@
 name: dcd
-root: /home/thadryan/Vaults/Projects/Work/Primary/DCD
+root: /home/thadryan/Vaults/Projects/Work/Primary/DCD/Code/Repo
 windows:
   - local:
-      layout: main-vertical
       panes:
         - bash -c "uv run nvim; exec bash"
-        - bash
-      commands:
-        - tmux resize-pane -t 0 -x 80%
   - server:
-      layout: main-vertical
       panes:
         - bash -c "cd /mnt/Workspace/DCD && nvim -R -c 'set nomodifiable'; exec bash"
-        - bash -c "cd /mnt/Workspace/DCD && exec bash"
-      commands:
-        - tmux resize-pane -t 0 -x 80%
   - staging:
       layout: even-horizontal
       panes:
@@ -23,3 +15,12 @@ windows:
   - issues:
       panes:
         - bash -c "gh-dash; exec bash"
+  - agent1:
+      panes:
+        - bash -c "cd ../Agent1 && pi; exec bash"
+  - agent2:
+      panes:
+        - bash -c "cd ../Agent2 && exec bash"
+  - agent3:
+      panes:
+        - bash -c "cd ../Agent3 && exec bash"

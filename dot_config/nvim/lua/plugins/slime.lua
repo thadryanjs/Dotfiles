@@ -19,7 +19,7 @@ return {
         -- Optional: create a command for easy use
         vim.api.nvim_create_user_command("ToggleSlimeIPython", ToggleSlimeIPython, {})
         -- don't ask for target pane
-        vim.g.slime_default_config = { session_id = "current", relative_pane = "right" }
+        vim.g.slime_default_config = { socket_name = vim.fn['get'](vim.fn.split(vim.env.TMUX, ","), 0), target_pane = "{last}" }
         vim.api.nvim_set_keymap("n", "<leader>ss", ":SlimeSendCurrentLine<cr><cr>", { noremap = true, silent = true })
         vim.api.nvim_set_keymap("n", "<leader>sc", "<Plug>SlimeSendCell", { noremap = true, silent = true })
         --vim.api.nvim_set_keymap("n", "<leader>sc", "<Plug>SlimeCellsSendAndGoToNext", { noremap = true, silent = true })
