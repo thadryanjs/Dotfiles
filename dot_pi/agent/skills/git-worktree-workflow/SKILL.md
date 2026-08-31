@@ -9,7 +9,9 @@ works in the main checkout, reviews your PRs, and is the only one who merges.
 
 **The one rule that matters: never open a PR touching a file that another open
 PR already touches.** Two open PRs on the same file conflict on merge, and
-every merge after that stales the rest. Everything below serves that rule.
+every merge after that stales the rest. To make this visible, every PR MUST be
+tagged with a label matching the primary file it edits. Everything below serves
+that rule.
 
 ## You Communicate Only Through Commits
 
@@ -113,8 +115,9 @@ gh pr create --draft -t "<primary-file>: <what it does>" -l "file:<primary-file>
 - **Draft**, always. The human marks it ready when they're about to review it.
 - **Title prefixed with the primary file**, e.g. `03_model.py: print class
   balance per split`. This makes collisions visible at a glance.
-- **Label `file:<path>` for each file you touched.** This is what the next
-  agent's check in step 1 reads.
+- **Label `file:<path>` for each file you touched.** This is NOT optional. This
+  tag is the primary signal the human and other agents use to see which files are
+  claimed.
 - Body states what changed and why, anything you were unsure about, and
   `Closes #<n>`.
 
