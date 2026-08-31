@@ -16,6 +16,10 @@
       {
         "kind": "directory",
         "path": "/home/thadryan/Vaults/Projects/Work/Primary/DCD"
+      },
+      {
+        "kind": "file",
+        "path": "/dev/null"
       }
     ]
   },
@@ -26,12 +30,20 @@
         "name": "Secret env files",
         "description": "Block .env files and variants",
         "patterns": [
-          { "pattern": ".env" },
-          { "pattern": ".env.*" }
+          {
+            "pattern": ".env"
+          },
+          {
+            "pattern": ".env.*"
+          }
         ],
         "allowedPatterns": [
-          { "pattern": ".env.example" },
-          { "pattern": "*.sample.env" }
+          {
+            "pattern": ".env.example"
+          },
+          {
+            "pattern": "*.sample.env"
+          }
         ],
         "protection": "noAccess",
         "onlyIfExists": true,
@@ -42,8 +54,12 @@
         "name": "Log files",
         "description": "Treat log files as read-only",
         "patterns": [
-          { "pattern": "*.log" },
-          { "pattern": "*.out" }
+          {
+            "pattern": "*.log"
+          },
+          {
+            "pattern": "*.out"
+          }
         ],
         "protection": "readOnly",
         "onlyIfExists": true,
@@ -54,12 +70,20 @@
         "name": "SSH keys",
         "description": "Block SSH private key files",
         "patterns": [
-          { "pattern": "*.pem" },
-          { "pattern": "*_rsa" },
-          { "pattern": "*_ed25519" }
+          {
+            "pattern": "*.pem"
+          },
+          {
+            "pattern": "*_rsa"
+          },
+          {
+            "pattern": "*_ed25519"
+          }
         ],
         "allowedPatterns": [
-          { "pattern": "*.pub" }
+          {
+            "pattern": "*.pub"
+          }
         ],
         "protection": "noAccess",
         "onlyIfExists": true,
@@ -70,8 +94,12 @@
         "name": "AWS credentials",
         "description": "Block AWS credentials and config files",
         "patterns": [
-          { "pattern": ".aws/credentials" },
-          { "pattern": ".aws/config" }
+          {
+            "pattern": ".aws/credentials"
+          },
+          {
+            "pattern": ".aws/config"
+          }
         ],
         "protection": "noAccess",
         "onlyIfExists": true,
@@ -82,9 +110,15 @@
         "name": "Database files",
         "description": "Protect database files from modification",
         "patterns": [
-          { "pattern": "*.db" },
-          { "pattern": "*.sqlite" },
-          { "pattern": "*.sqlite3" }
+          {
+            "pattern": "*.db"
+          },
+          {
+            "pattern": "*.sqlite"
+          },
+          {
+            "pattern": "*.sqlite3"
+          }
         ],
         "protection": "readOnly",
         "onlyIfExists": true,
@@ -95,8 +129,12 @@
         "name": "SSH config directory",
         "description": "Protect ~/.ssh from modification",
         "patterns": [
-          { "pattern": ".ssh/*" },
-          { "pattern": ".ssh/config" }
+          {
+            "pattern": ".ssh/*"
+          },
+          {
+            "pattern": ".ssh/config"
+          }
         ],
         "protection": "noAccess",
         "onlyIfExists": true,
@@ -107,7 +145,9 @@
         "name": "GnuPG directory",
         "description": "Protect ~/.gnupg keys",
         "patterns": [
-          { "pattern": ".gnupg/*" }
+          {
+            "pattern": ".gnupg/*"
+          }
         ],
         "protection": "noAccess",
         "onlyIfExists": true,
