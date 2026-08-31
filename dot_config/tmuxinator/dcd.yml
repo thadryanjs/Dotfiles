@@ -15,14 +15,11 @@ windows:
         - bash -c "cd /mnt/Workspace/DCD && exec bash"
       commands:
         - tmux resize-pane -t 0 -x 80%
-  - git:
+  - staging:
+      layout: even-horizontal
       panes:
         - bash -c "lazygit; exec bash"
-  - diff:
+        - bash -c "hunk diff --watch; exec bash"
+  - issues:
       panes:
-        - bash -c "hunk diff; exec bash"
-  - bash:
-      layout: main-vertical
-      panes:
-        - bash
-        - bash
+        - bash -c "gh-dash; exec bash"

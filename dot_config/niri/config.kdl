@@ -3,6 +3,7 @@
 
 spawn-sh-at-startup "export NIRI_SOCKET=$(ls /run/user/1000/niri.wayland-*.sock | head -n 1); qs -c noctalia-shell --no-duplicate"
 spawn-sh-at-startup "sleep 3 && (megasync &); sleep 1 && xdotool search --class megasync minimize || true"
+spawn-sh-at-startup "sleep 2 && wpctl set-mute @DEFAULT_AUDIO_SINK@ 0"
 
 input {
     keyboard {
