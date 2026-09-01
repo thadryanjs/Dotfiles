@@ -41,6 +41,23 @@ return {
     config = function(_, opts)
       require("quarto").setup(opts)
 
+      -- Remove background noise from code cells
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = { "quarto", "markdown" },
+        callback = function()
+          local groups = {
+            "@markup.raw.block",
+            "@markup.raw",
+            "@markup.raw.block.markdown",
+            "@text.literal.block",
+            "markdownCodeDelimiter",
+          }
+          for _, group in ipairs(groups) do
+            vim.api.nvim_set_hl(0, group, { bg = "NONE" })
+          end
+        end,
+      })
+
       local runner = require("quarto.runner")
       local map = function(mode, lhs, rhs, desc)
         vim.keymap.set(mode, lhs, rhs, { desc = desc, silent = true })
@@ -60,6 +77,7 @@ return {
       map("n", "<leader>qa", ":QuartoSendAbove<CR>", "quarto send above")
       map("n", "<leader>qb", ":QuartoSendBelow<CR>", "quarto send below")
       map("n", "<leader>qf", ":QuartoSendAll<CR>", "quarto send all")
+      map("n", "<leader>qo", ":QuartoActivate<CR>", "quarto activate")
     end,
   },
 }

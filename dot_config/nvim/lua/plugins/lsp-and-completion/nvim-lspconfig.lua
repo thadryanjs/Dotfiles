@@ -85,6 +85,16 @@ return {
       "jdtls",
     })
 
+    -- Disable semantic tokens to prevent background color shifts in injected blocks
+    vim.api.nvim_create_autocmd("LspAttach", {
+      callback = function(args)
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        if client and client.server_capabilities.semanticTokensProvider then
+          client.server_capabilities.semanticTokensProvider = nil
+        end
+      end,
+    })
+
     -- NOTE: the old native-completion autocmd was removed on purpose.
     -- coq_nvim handles all completion now (see coqnvim.lua).
   end,

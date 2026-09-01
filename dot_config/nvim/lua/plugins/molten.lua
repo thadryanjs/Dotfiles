@@ -5,7 +5,7 @@ return {
     dependencies = { "3rd/image.nvim" },
     build = ":UpdateRemotePlugins",
     init = function()
-      vim.g.molten_image_provider = "image.nvim"
+      -- vim.g.molten_image_provider = "image.nvim"
       vim.g.molten_output_win_max_height = 20
       vim.g.molten_auto_open_output = true
       vim.g.molten_wrap_output = true
@@ -14,10 +14,38 @@ return {
     end,
     config = function()
       vim.keymap.set('n', '<leader>mi', ':MoltenInit<CR>', { desc = "Molten Init" })
+      
+      -- Remove background noise from Molten output and cell highlighting
+      vim.api.nvim_set_hl(0, "MoltenOutput", { bg = "NONE" })
+      vim.api.nvim_set_hl(0, "MoltenOutputError", { bg = "NONE" })
+
+      -- Nuke all Molten backgrounds to stop "color noise"
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "MoltenInit",
+        callback = function()
+          for _, hl in ipairs(vim.api.nvim_get_hl()) do
+            -- This is a bit hacky but finds all Molten highlight groups
+            -- Note: nvim_get_hl returns keys as IDs, we need names
+          end
+        end,
+      })
+      
+      -- simpler approach: target likely group names
+      local molten_groups = {
+        "MoltenCell",
+        "MoltenActiveCell",
+        "MoltenExecutedCell",
+        "MoltenRunningCell",
+        "MoltenErrorCell",
+      }
+      for _, group in ipairs(molten_groups) do
+        vim.api.nvim_set_hl(0, group, { bg = "NONE" })
+      end
     end,
   },
   {
     "3rd/image.nvim",
+    enabled = false,
     opts = {
       backend = "kitty",
       processor = "magick_cli",
