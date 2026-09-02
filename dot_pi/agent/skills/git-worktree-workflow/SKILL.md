@@ -1,5 +1,5 @@
 ---
-description: Work autonomously in a dedicated git worktree, claim issues with wip labels, one draft PR per task, never two open PRs on the same file
+description: Work autonomously in a dedicated git worktree, detect the base branch, claim issues with wip labels, one draft PR per task, never two open PRs on the same file
 ---
 
 # Worktree Agent Skill
@@ -42,14 +42,14 @@ checkout or another worktree.
 | Command | Why |
 |---------|-----|
 | `git merge` | Merging is the human's decision, made in review |
-| `git push` to `master` | Nothing reaches master except through a reviewed PR |
+| `git push` to the base branch | Nothing reaches it except through a reviewed PR |
 | `git reset --hard` | Destroys work that may not be recoverable |
 | `git push --force` (bare) | Use `--force-with-lease` on your own branch only |
 | `git worktree add/remove` | Isolation boundaries are set up by the human |
 | `rm`, `git checkout --` | Discards work instead of committing it |
 | Anything writing to `$HOME` | Escapes git's ability to undo it |
 
-`git rebase origin/master` and `git push --force-with-lease` on your own branch
+`git rebase "origin/$BASE"` and `git push --force-with-lease` on your own branch
 are allowed.
 
 ## The Per-Task Loop
@@ -82,15 +82,39 @@ If any file you need to edit appears in that list, **stop** and report which PR
 is blocking you. Remove your `wip:` label. Do not start. The human will either
 wait for that PR to merge or hand the task to whoever owns the file.
 
-### 3. Start from current master
+### 3. Find the base branch, then start from it
+
+**Never assume the branch is called `master` or `main`.** Ask the repo:
 
 ```bash
-git fetch && git checkout -b <task-name> origin/master
+BASE=$(gh repo view --json defaultBranchRef --jq .defaultBranchRef.name)
+echo "base branch: $BASE"
 ```
 
-`origin/master` is not optional. A plain `git checkout -b <name>` branches off
+If that fails, fall back to git:
+
+```bash
+BASE=$(git symbolic-ref --short refs/remotes/origin/HEAD | sed 's@^origin/@@')
+```
+
+If neither works, **stop and ask.** Do not guess. Do not try `master` and then
+`main`. Guessing wrong puts your commits on the wrong base and every later
+command compounds it.
+
+Then branch:
+
+```bash
+git fetch && git checkout -b <task-name> "origin/$BASE"
+```
+
+`origin/$BASE` is not optional. A plain `git checkout -b <name>` branches off
 whatever you were last on — usually the previous task's branch — and your PR
 will carry commits that don't belong to this task.
+
+Never check out the base branch itself, or any branch you did not create. It is
+checked out in the human's worktree, so the attempt will fail. **If a checkout
+fails because a branch is in use by another worktree, that is a signal you are
+doing the wrong thing — stop and report it. Do not invent a substitute branch.**
 
 Name the branch from the issue: `agent1-31-transparency-receipts`.
 
@@ -183,21 +207,21 @@ reconcile the issue queue by hand.
 When the human tells you the blocking PR merged:
 
 ```bash
-git fetch && git rebase origin/master
+git fetch && git rebase "origin/$BASE"
 ```
 
 Then re-run your verification before opening the PR. The rebase makes your
 branch current; the test run is what says it's still correct.
 
-## When Master Has Moved
+## When The Base Branch Has Moved
 
 Only merged work is real. A pushed branch — yours or another agent's — is a
-proposal and is not on master.
+proposal and is not on the base branch.
 
 If your branch needs updating:
 
 ```bash
-git fetch && git rebase origin/master
+git fetch && git rebase "origin/$BASE"
 git push --force-with-lease
 ```
 
@@ -226,6 +250,7 @@ Stop rather than proceeding when:
 - the repository state doesn't match what the issue describes
 - you can't verify your own work
 - a change can't be expressed as a commit in this repo
+- you cannot determine the repo's base branch name
 
 Reporting a blocker is a successful outcome. Producing something plausible that
 works around a boundary is not. Always remove your `wip:` label when you stop
@@ -260,13 +285,13 @@ gh pr list --json number,title,files --jq '.[] | "\(.number) \(.title) \(.files[
 #   (the checkout key fails: the branch is already in a worktree)
 
 # after merging
-git checkout master && git pull
+git checkout "$BASE" && git pull
 
 # after a batch, run the pipeline end to end
 # per-branch green does not mean merged-together green
 
 # reset an idle worktree off its merged branch
-git -C ../Agent1 checkout -B agent1-idle origin/master
+git -C ../Agent1 checkout -B agent1-idle origin/$BASE
 
 # teardown
 git worktree remove ../Agent1
@@ -288,7 +313,7 @@ the code.
 gh-dash reads only `pager.diff` in `~/.config/gh-dash/config.yml` — it ignores
 `core.pager` and `GH_PAGER`.
 
-The human reads state, not just deltas — `git log --reverse -p master..<branch>`
+The human reads state, not just deltas — `git log --reverse -p "$BASE"..<branch>`
 commit by commit, or `git show <sha>:path` for the file as it stands — because a
 diff says what changed, not what the code now is. Granular commits and clear PR
 descriptions are what make that cheap.

@@ -21,6 +21,3 @@ windows:
   - agent2:
       panes:
         - bash -c "cd ../Agent2 && exec bash"
-  - agent3:
-      panes:
-        - bash -c "cd ../Agent3 && exec bash"

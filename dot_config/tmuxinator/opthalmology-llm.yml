@@ -1,28 +1,23 @@
 name: opthalmology-llm
-root: /home/thadryan/Vaults/Projects/Work/Primary/RCD/OpthalmologyLLM/Code
+root: /home/thadryan/Vaults/Projects/Work/Primary/RCD/OpthalmologyLLM/Code/Repo
 windows:
   - local:
-      layout: main-vertical
       panes:
         - bash -c "uv run nvim; exec bash"
-        - bash
-      commands:
-        - tmux resize-pane -t 0 -x 80%
   - server:
-      layout: main-vertical
       panes:
         - bash -c "cd /mnt/Workspace/OpthalmologyLLM && nvim -R -c 'set nomodifiable'; exec bash"
-        - bash -c "cd /mnt/Workspace/OpthalmologyLLM && exec bash"
-      commands:
-        - tmux resize-pane -t 0 -x 80%
-  - git:
+  - staging:
+      layout: even-horizontal
       panes:
         - bash -c "lazygit; exec bash"
-  - diff:
+        - bash -c "hunk diff --watch; exec bash"
+  - issues:
       panes:
-        - bash -c "hunk diff; exec bash"
-  - bash:
-      layout: main-vertical
+        - bash -c "gh-dash; exec bash"
+  - agent1:
       panes:
-        - bash
-        - bash
+        - bash -c "cd ../Agent1 && pi; exec bash"
+  - agent2:
+      panes:
+        - bash -c "cd ../Agent2 && exec bash"
