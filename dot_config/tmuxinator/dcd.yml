@@ -2,17 +2,20 @@ name: dcd
 root: /home/thadryan/Vaults/Projects/Work/Primary/DCD/Code/Repo
 windows:
   - local:
+      layout: "224d,191x48,0,0{130x48,0,0,7,60x48,131,0,14}"
       panes:
         - bash -c "uv run nvim; exec bash"
+        - bash
   - server:
       panes:
         - bash -c "cd /mnt/Workspace/DCD && nvim -R -c 'set nomodifiable'; exec bash"
-  - staging:
-      layout: even-horizontal
+  - git-overview:
       panes:
         - bash -c "lazygit; exec bash"
+  - git-diff:
+      panes:
         - bash -c "hunk diff --watch; exec bash"
-  - issues:
+  - git-issues:
       panes:
         - bash -c "gh-dash; exec bash"
   - agent1:
@@ -21,3 +24,6 @@ windows:
   - agent2:
       panes:
         - bash -c "cd ../Agent2 && exec bash"
+  - bash:
+      panes:
+        - bash

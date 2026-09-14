@@ -148,10 +148,13 @@ read from the human's checkout, not yours. Report it rather than working around 
 ```bash
 git push -u origin <task-name>
 gh pr create --draft \
+  --base "$BASE" \
   -t "<primary-file>: <what it does>" \
   -l "file:<primary-file>"
 ```
 
+- **`--base "$BASE"` explicitly.** Without it, `gh` targets the repo default,
+  which may not be the branch you built on. Always pass it.
 - **Draft**, always. The human marks it ready when they're about to review it.
 - **Title prefixed with the primary file**, e.g. `03_model.py: print class
   balance per split`. Makes collisions visible at a glance in the dashboard.
@@ -187,10 +190,16 @@ Closes #41
 Closes #42
 ```
 
-After opening the PR, verify the link registered:
+After opening the PR, verify both the link and the base:
 
 ```bash
-gh pr view <n> --json closingIssuesReferences
+gh pr view <n> --json closingIssuesReferences,baseRefName
+```
+
+`baseRefName` must equal `$BASE`. If it doesn't, fix it:
+
+```bash
+gh pr edit <n> --base "$BASE"
 ```
 
 If that comes back empty, the keyword didn't take. Fix the body and check again:

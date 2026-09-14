@@ -46,11 +46,7 @@
     "profiles": {
       "standard": {
         "bash": {
-          "ls": "allow",
-          "pwd": "allow",
-          "git status": "allow",
-          "git diff": "allow",
-          "*": "ask"
+          "*": "allow"
         },
         "read": {
           "*": "allow",
@@ -60,7 +56,7 @@
         "write": "allow",
         "edit": "allow",
         "spawn": {
-          "*": "ask"
+          "*": "allow"
         },
         "webfetch": {
           "*": "allow"

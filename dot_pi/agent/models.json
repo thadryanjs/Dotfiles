@@ -61,20 +61,56 @@
       "apiKey": "$DARTMOUTH_CHAT_API_KEY",
       "models": [
         {
+          "id": "google.gemma-3-27b-it",
+          "name": "Gemma 3 27B (Dartmouth)"
+        },
+        {
+          "id": "google.gemma-4-31B-it",
+          "name": "Gemma 4 31B (Dartmouth)"
+        },
+        {
+          "id": "zai-org.glm-5.3",
+          "name": "GLM 5.3 (Dartmouth)"
+        },
+        {
+          "id": "zai-org.glm-5.3-flash",
+          "name": "GLM 5.3 Flash (Dartmouth)"
+        },
+        {
+          "id": "openai.gpt-oss-120b",
+          "name": "GPT-OSS 120B (Dartmouth)"
+        },
+        {
+          "id": "qwen.qwen3.5-122b",
+          "name": "Qwen 3.5 122B (Dartmouth)"
+        },
+        {
+          "id": "meta.llama-3.2-11b-vision-instruct",
+          "name": "Llama 3.2 11B Vision (Dartmouth)"
+        },
+        {
+          "id": "anthropic.claude-fable-5",
+          "name": "Claude Fable 5 (Dartmouth)"
+        },
+        {
+          "id": "anthropic.claude-fable-5-1",
+          "name": "Claude Fable 5.1 (Dartmouth)"
+        },
+        {
           "id": "anthropic.claude-haiku-4-5-20251001",
           "name": "Claude Haiku 4.5 (Dartmouth)"
         },
         {
-          "id": "anthropic.claude-opus-4-5-20251101",
-          "name": "Claude Opus 4.5 (Dartmouth)"
-        },
-        {
-          "id": "anthropic.claude-opus-4-6",
-          "name": "Claude Opus 4.6 (Dartmouth)"
-        },
-        {
           "id": "anthropic.claude-opus-4-7",
           "name": "Claude Opus 4.7 (Dartmouth)"
+        },
+        {
+          "id": "anthropic.claude-opus-4-8",
+          "name": "Claude Opus 4.8 (Dartmouth)"
+        },
+        {
+          "id": "anthropic.claude-opus-5",
+          "name": "Claude Opus 5 (Dartmouth)"
         },
         {
           "id": "anthropic.claude-sonnet-4-5-20250929",
@@ -85,56 +121,24 @@
           "name": "Claude Sonnet 4.6 (Dartmouth)"
         },
         {
-          "id": "baai.bge-large-en-v1-5",
-          "name": "BGE Large EN v1.5 (Dartmouth)"
+          "id": "anthropic.claude-sonnet-5",
+          "name": "Claude Sonnet 5 (Dartmouth)"
         },
         {
-          "id": "baai.bge-m3",
-          "name": "BGE M3 (Dartmouth)"
+          "id": "vertex_ai.gemini-3.1-pro-preview",
+          "name": "Gemini 3.1 Pro (Dartmouth)"
         },
         {
-          "id": "curriculum-helper",
-          "name": "Curriculum Helper (Dartmouth)"
+          "id": "vertex_ai.gemini-3.5-flash",
+          "name": "Gemini 3.5 Flash (Dartmouth)"
         },
         {
-          "id": "google.gemma-3-27b-it",
-          "name": "Gemma 3 27B (Dartmouth)"
+          "id": "vertex_ai.gemini-3.7-flash",
+          "name": "Gemini 3.7 Flash (Dartmouth)"
         },
         {
-          "id": "google.gemma-4-31B-it",
-          "name": "Gemma 4 31B (Dartmouth)"
-        },
-        {
-          "id": "google_genai.gemini-embedding-001",
-          "name": "Gemini Embedding 001 (Dartmouth)"
-        },
-        {
-          "id": "hop-bo-patron-help-bot",
-          "name": "Patron Help Bot (Dartmouth)"
-        },
-        {
-          "id": "meta.codellama-13b-instruct-hf",
-          "name": "CodeLlama 13B (Dartmouth)"
-        },
-        {
-          "id": "meta.llama-3-2-3b-instruct",
-          "name": "Llama 3.2 3B (Dartmouth)"
-        },
-        {
-          "id": "meta.llama-3.2-11b-vision-instruct",
-          "name": "Llama 3.2 11B Vision (Dartmouth)"
-        },
-        {
-          "id": "mistral.codestral-embed-2505",
-          "name": "Codestral Embed 2505 (Dartmouth)"
-        },
-        {
-          "id": "mistral.mistral-embed",
-          "name": "Mistral Embed (Dartmouth)"
-        },
-        {
-          "id": "mistral.mistral-large-2512",
-          "name": "Mistral Large 3 (Dartmouth)"
+          "id": "vertex_ai.gemini-3.8-flash",
+          "name": "Gemini 3.8 Flash (Dartmouth)"
         },
         {
           "id": "openai.gpt-5.3-chat-latest",
@@ -153,8 +157,48 @@
           "name": "GPT 5.5 (Dartmouth)"
         },
         {
-          "id": "openai.gpt-oss-120b",
-          "name": "GPT-OSS 120B (Dartmouth)"
+          "id": "openai.gpt-5.6-luna",
+          "name": "GPT 5.6 Luna (Dartmouth)"
+        },
+        {
+          "id": "openai.gpt-5.6-sol",
+          "name": "GPT 5.6 Sol (Dartmouth)"
+        },
+        {
+          "id": "openai.gpt-5.6-terra",
+          "name": "GPT 5.6 Terra (Dartmouth)"
+        },
+        {
+          "id": "mistral.mistral-large-2512",
+          "name": "Mistral Large 3 (Dartmouth)"
+        },
+        {
+          "id": "meta.llama-3-2-3b-instruct",
+          "name": "Llama 3.2 3B (Dartmouth)"
+        },
+        {
+          "id": "baai.bge-large-en-v1-5",
+          "name": "BGE Large EN v1.5 (Dartmouth)"
+        },
+        {
+          "id": "baai.bge-m3",
+          "name": "BGE M3 (Dartmouth)"
+        },
+        {
+          "id": "google_genai.gemini-embedding-001",
+          "name": "Gemini Embedding 001 (Dartmouth)"
+        },
+        {
+          "id": "meta.codellama-13b-instruct-hf",
+          "name": "CodeLlama 13B (Dartmouth)"
+        },
+        {
+          "id": "mistral.codestral-embed-2505",
+          "name": "Codestral Embed 2505 (Dartmouth)"
+        },
+        {
+          "id": "mistral.mistral-embed",
+          "name": "Mistral Embed (Dartmouth)"
         },
         {
           "id": "openai.text-embedding-3-large",
@@ -163,34 +207,6 @@
         {
           "id": "openai.text-embedding-3-small",
           "name": "Text Embedding 3 Small (Dartmouth)"
-        },
-        {
-          "id": "qwen.qwen3-vl:32b",
-          "name": "Qwen3-VL 32B (Dartmouth)"
-        },
-        {
-          "id": "qwen.qwen3.5-122b",
-          "name": "Qwen3.5 122B (Dartmouth)"
-        },
-        {
-          "id": "vertex_ai.gemini-2.5-pro",
-          "name": "Gemini 2.5 Pro (Dartmouth)"
-        },
-        {
-          "id": "vertex_ai.gemini-3-flash-preview",
-          "name": "Gemini 3 Flash (Dartmouth)"
-        },
-        {
-          "id": "vertex_ai.gemini-3.1-flash-lite-preview",
-          "name": "Gemini 3.1 Flash Lite (Dartmouth)"
-        },
-        {
-          "id": "vertex_ai.gemini-3.1-pro-preview",
-          "name": "Gemini 3.1 Pro (Dartmouth)"
-        },
-        {
-          "id": "vertex_ai.gemini-3.5-flash",
-          "name": "Gemini 3.5 Flash (Dartmouth)"
         },
         {
           "id": "voyage.voyage-3.5",
@@ -207,6 +223,18 @@
         {
           "id": "voyage.voyage-law-2",
           "name": "Voyage Law 2 (Dartmouth)"
+        },
+        {
+          "id": "hop-bo-patron-help-bot",
+          "name": "Patron Help Bot (Dartmouth)"
+        },
+        {
+          "id": "vertex_ai.gemini-2.5-pro",
+          "name": "Gemini 2.5 Pro (Dartmouth)"
+        },
+        {
+          "id": "qwen.qwen3-vl:32b",
+          "name": "Qwen3-VL 32B (Dartmouth)"
         }
       ]
     }

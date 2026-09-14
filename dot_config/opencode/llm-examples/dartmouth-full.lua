@@ -11,32 +11,32 @@ local dartmouth = {
 
 local models = {
     {
-        name = "Claude Sonnet 4.5",
-        model = "anthropic.claude-sonnet-4-5-20250929",
+        name = "Claude Sonnet 5",
+        model = "anthropic.claude-sonnet-5",
     },
     {
-        name = "Claude Opus 4.6",
-        model = "anthropic.claude-opus-4-6",
+        name = "Claude Opus 5",
+        model = "anthropic.claude-opus-5",
     },
     {
         name = "Claude Haiku 4.5",
         model = "anthropic.claude-haiku-4-5-20251001",
     },
     {
-        name = "GPT 5.4",
-        model = "openai.gpt-5.4-2026-03-05",
+        name = "GPT 5.6 Luna",
+        model = "openai.gpt-5.6-luna",
     },
     {
-        name = "GPT 4.1",
-        model = "openai.gpt-4.1-2025-04-14",
+        name = "GPT 5.5",
+        model = "openai.gpt-5.5-2026-04-23",
     },
     {
-        name = "Gemini 2.5 Flash",
-        model = "vertex_ai.gemini-2.5-flash",
+        name = "Gemini 3.8 Flash",
+        model = "vertex_ai.gemini-3.8-flash",
     },
     {
-        name = "Gemini 2.5 Pro",
-        model = "vertex_ai.gemini-2.5-pro",
+        name = "Gemini 3.1 Pro",
+        model = "vertex_ai.gemini-3.1-pro-preview",
     },
     {
         name = "Mistral Large 3",
@@ -48,7 +48,7 @@ local models = {
     },
     {
         name = "Qwen3-VL 32b",
-        model = "qwen.qwen3-vl-32b-instruct-fp8",
+        model = "qwen.qwen3-vl:32b",
     },
 }
 
