@@ -237,6 +237,20 @@
           "name": "Qwen3-VL 32B (Dartmouth)"
         }
       ]
+    },
+    "opencode": {
+      "baseUrl": "https://opencode.ai/zen/v1",
+      "api": "openai-completions",
+      "apiKey": "$OPENCODE_API_KEY",
+      "models": [
+        {
+          "id": "big-pickle",
+          "name": "Big Pickle (OpenCode)",
+          "reasoning": true,
+          "contextWindow": 200000,
+          "maxTokens": 32000
+        }
+      ]
     }
   }
 }

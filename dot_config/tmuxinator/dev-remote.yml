@@ -6,8 +6,6 @@ windows:
       panes:
         - bash -c "nvim; exec bash"
         - bash
-      commands:
-        - tmux resize-pane -t 0 -x 80%
   - git:
       panes:
         - bash -c "lazygit; exec bash"
@@ -19,5 +17,3 @@ windows:
       panes:
         - bash -c "cd /mnt/Workspace && nvim -R -c 'set nomodifiable'; exec bash"
         - bash -c "cd /mnt/Workspace && exec bash"
-      commands:
-        - tmux resize-pane -t 0 -x 80%

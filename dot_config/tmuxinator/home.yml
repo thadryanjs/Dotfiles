@@ -1,23 +1,21 @@
 name: home
-root: /home/thadryan/Vaults/Projects
+root: /home/thadryan/Vaults/Knowledge
 windows:
+  - doom-sync:
+      panes:
+        - bash -c "emacs -nw"
   - nvim-knowledge:
-      root: /home/thadryan/Vaults/Knowledge
-      layout: "a989,191x48,0,0{130x48,0,0,44,60x48,131,0,45}"
+      layout: main-vertical
       panes:
         - uv run nvim
-        -
-  - bash-knowlege:
-      root: /home/thadryan/Vaults/Knowledge
-      layout: "66d1,191x48,0,0,50"
+        - bash
+  - mindmap-overview:
+      layout: "0e93,191x48,0,0{95x48,0,0[95x24,0,0,100,95x23,0,25,120],95x48,96,0[95x24,96,0,112,95x23,96,25,119]}"
       panes:
-        -
-  - nvim-proj:
-      layout: "6986,191x48,0,0{130x48,0,0,51,60x48,131,0,53}"
+        - bash -c "h-m-m MindMaps/topline.hmm; exec bash"
+        - bash -c "h-m-m MindMaps/experiments.hmm; exec bash"
+        - bash -c "h-m-m MindMaps/beacons.hmm; exec bash"
+        - bash -c "h-m-m MindMaps/projects.hmm; exec bash"
+  - bash:
       panes:
-        - uv run nvim
-        -
-  - bash-proj:
-      layout: "66d3,191x48,0,0,52"
-      panes:
-        -
+        - bash

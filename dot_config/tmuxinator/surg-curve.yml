@@ -6,8 +6,6 @@ windows:
       panes:
         - bash -c "nvim; exec bash"
         - bash
-      commands:
-        - tmux resize-pane -t 0 -x 80%
   - git:
       panes:
         - bash -c "lazygit; exec bash"

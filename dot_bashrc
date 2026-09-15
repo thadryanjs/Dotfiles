@@ -38,6 +38,7 @@ with_llm_keys() {
   OPENROUTER_API_KEY="$(jq -r '.[]|select(.name=="OpenRouterAPI").login.password'      <<<"$items")" \
   DEEPSEEK_API_KEY="$(jq -r '.[]|select(.name=="DeepSeekAPI").login.password'          <<<"$items")" \
   DARTMOUTH_CHAT_API_KEY="$(jq -r '.[]|select(.name=="DartmouthChatAPI").login.password' <<<"$items")" \
+  OPENCODE_API_KEY="$(jq -r '.[]|select(.name=="OpencodeZenAPI").login.password'          <<<"$items")" \
   BW_SESSION= \
   "$@"
 }
@@ -81,7 +82,6 @@ elif command -v tmuxinator.ruby4.0 >/dev/null 2>&1; then
 fi
 
 
-alias vpn-start='tmux new-session -d -s vpn && tmux send-keys -t vpn "sh ~/Vaults/Projects/Tools/Scripts/Dartmouth/VPN/vpn.sh" C-m && tmux split-window -h && tmux send-keys -t vpn "read -p \"Press enter for Auth...\" ; sh ~/Vaults/Projects/Tools/Scripts/Dartmouth/Auth/dartmouth-kinit.sh" C-m && tmux split-window -v && tmux send-keys -t vpn "read -p \"Press enter for FS...\" ; dartfs" C-m && tmux attach -t vpn'
 alias tv-org='tv org-projects'
 alias tv-tmux='tv tmux-sessions'
 alias tv-tmuxinator='tv tmuxinator'

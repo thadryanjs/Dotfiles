@@ -1,0 +1,328 @@
+---
+description: Work autonomously in a dedicated git worktree, detect the base branch, claim issues with wip labels, one draft PR per task, never two open PRs on the same file
+---
+
+# git-worktree
+
+You work in a dedicated git worktree. Other agents have their own. The human
+works in the main checkout, reviews your PRs, and is the only one who merges.
+
+**The one rule that matters: never open a PR touching a file that another open
+PR already touches.** Two open PRs on the same file conflict on merge, and every
+merge after that stales the rest. Everything below serves that rule.
+
+## You Communicate Only Through Commits
+
+Every change you make — additions, edits, deletions — must be a commit in this
+repository, so the human can review and revert it.
+
+- Commit before you stop, even for incomplete work. A WIP commit is reviewable;
+  a dirty working tree is not.
+- Commit **often and granularly**. Small commits are what make review readable.
+  The human walks your commits one at a time; one commit per logical idea.
+- Never discard changes: no `rm` on untracked files, no `git checkout -- <file>`,
+  no `git reset --hard`. Only ever add commits.
+- If something you need to do can't be expressed as a commit in this repo —
+  installing a package, writing outside the repo, editing a gitignored file —
+  stop and ask.
+
+## Your Boundaries
+
+```
+<Repo>/                # human's checkout — NEVER touch
+<Repo>-agent1/         # a worktree — not yours unless you're in it
+<Repo>-agent2/         # another agent's worktree
+```
+
+Work only in the directory you were started in. Never `cd` into the main
+checkout or another worktree.
+
+## Forbidden Commands
+
+| Command | Why |
+|---------|-----|
+| `git merge` | Merging is the human's decision, made in review |
+| `git push` to the base branch | Nothing reaches it except through a reviewed PR |
+| `git reset --hard` | Destroys work that may not be recoverable |
+| `git push --force` (bare) | Use `--force-with-lease` on your own branch only |
+| `git worktree add/remove` | Isolation boundaries are set up by the human |
+| `rm`, `git checkout --` | Discards work instead of committing it |
+| Anything writing to `$HOME` | Escapes git's ability to undo it |
+
+`git rebase "origin/$BASE"` and `git push --force-with-lease` on your own branch
+are allowed.
+
+## The Per-Task Loop
+
+You may be given several issue numbers at once. **Work them one at a time**, and
+run this whole loop for each. Do not claim an issue you aren't starting now —
+the labels are how the human sees what's actually in progress.
+
+### 1. Claim the issue
+
+```bash
+gh issue edit <n> --add-label "wip:<your-agent-name>"
+```
+
+If you stop without opening a PR, remove it again:
+
+```bash
+gh issue edit <n> --remove-label "wip:<your-agent-name>"
+```
+
+An issue left labeled `wip:` with no PR looks claimed when it isn't.
+
+### 2. Check what files are already claimed
+
+```bash
+gh pr list --json number,title,files --jq '.[] | "\(.number) \(.title) \(.files[].path)"'
+```
+
+If any file you need to edit appears in that list, **stop** and report which PR
+is blocking you. Remove your `wip:` label. Do not start. The human will either
+wait for that PR to merge or hand the task to whoever owns the file.
+
+### 3. Find the base branch, then start from it
+
+**Never assume the branch is called `master` or `main`.** Ask the repo:
+
+```bash
+BASE=$(gh repo view --json defaultBranchRef --jq .defaultBranchRef.name)
+echo "base branch: $BASE"
+```
+
+If that fails, fall back to git:
+
+```bash
+BASE=$(git symbolic-ref --short refs/remotes/origin/HEAD | sed 's@^origin/@@')
+```
+
+If neither works, **stop and ask.** Do not guess. Do not try `master` and then
+`main`. Guessing wrong puts your commits on the wrong base and every later
+command compounds it.
+
+Then branch:
+
+```bash
+git fetch && git checkout -b <task-name> "origin/$BASE"
+```
+
+`origin/$BASE` is not optional. A plain `git checkout -b <name>` branches off
+whatever you were last on — usually the previous task's branch — and your PR
+will carry commits that don't belong to this task.
+
+Never check out the base branch itself, or any branch you did not create. It is
+checked out in the human's worktree, so the attempt will fail. **If a checkout
+fails because a branch is in use by another worktree, that is a signal you are
+doing the wrong thing — stop and report it. Do not invent a substitute branch.**
+
+Name the branch from the issue: `agent1-31-transparency-receipts`.
+
+### 4. Read the spec
+
+```bash
+gh issue view <n>
+```
+
+The issue states the task, which files are in scope, and any fixed contract:
+what your code reads and writes, column names, dtypes, paths. **Documented
+contracts are fixed.** If the task appears to require changing one, stop and
+ask — other code depends on it.
+
+### 5. Do the work
+
+Stay inside the scope the issue gave you. Commit as you go, one idea per commit.
+If the task genuinely needs a file outside your scope, stop and say so.
+
+### 6. Verify
+
+Run the relevant tests or pipeline step. Use committed fixture data with
+repo-relative paths, so it runs identically in any worktree. Do not open a PR
+until it passes.
+
+If a path fails, check whether it's hardcoded to an absolute location — those
+read from the human's checkout, not yours. Report it rather than working around it.
+
+### 7. Open a draft PR
+
+```bash
+git push -u origin <task-name>
+gh pr create --draft \
+  --base "$BASE" \
+  -t "<primary-file>: <what it does>" \
+  -l "file:<primary-file>"
+```
+
+- **`--base "$BASE"` explicitly.** Without it, `gh` targets the repo default,
+  which may not be the branch you built on. Always pass it.
+- **Draft**, always. The human marks it ready when they're about to review it.
+- **Title prefixed with the primary file**, e.g. `03_model.py: print class
+  balance per split`. Makes collisions visible at a glance in the dashboard.
+- **A `file:<path>` label for every file you touched.** This is what the next
+  agent's check in step 2 reads. If the labels are wrong, the rule silently fails.
+- Body states what changed and why, anything you were unsure about, and
+  `Closes #<n>`.
+
+### 8. Stop
+
+Wait for the next task, or move to the next issue you were given and start
+again at step 1. Do not merge, do not clean up.
+
+## Closing Issues Is Not Your Job
+
+You never close an issue. You link it, and the merge closes it.
+
+The link only registers if the PR **body** contains a closing keyword followed
+by the issue number:
+
+```
+Closes #41
+```
+
+`Closes`, `Fixes`, and `Resolves` work. Nothing else does. A bare `#41`, or
+"addresses #41", or the number in the PR *title* instead of the body, creates no
+link — the PR merges and the issue silently stays open.
+
+One keyword per issue. For several issues, several lines:
+
+```
+Closes #41
+Closes #42
+```
+
+After opening the PR, verify both the link and the base:
+
+```bash
+gh pr view <n> --json closingIssuesReferences,baseRefName
+```
+
+`baseRefName` must equal `$BASE`. If it doesn't, fix it:
+
+```bash
+gh pr edit <n> --base "$BASE"
+```
+
+If that comes back empty, the keyword didn't take. Fix the body and check again:
+
+```bash
+gh pr edit <n> --body "<corrected body>"
+```
+
+Do not proceed until it lists the issue. An unlinked PR means the human has to
+reconcile the issue queue by hand.
+
+## If You Were Blocked
+
+When the human tells you the blocking PR merged:
+
+```bash
+git fetch && git rebase "origin/$BASE"
+```
+
+Then re-run your verification before opening the PR. The rebase makes your
+branch current; the test run is what says it's still correct.
+
+## When The Base Branch Has Moved
+
+Only merged work is real. A pushed branch — yours or another agent's — is a
+proposal and is not on the base branch.
+
+If your branch needs updating:
+
+```bash
+git fetch && git rebase "origin/$BASE"
+git push --force-with-lease
+```
+
+**The push is not optional after a rebase.** The rebase rewrote your commits, so
+without pushing, GitHub still shows the old ones and the PR can't merge cleanly.
+
+Symptom to watch for: the change you're asked to make appears already done, or
+something the issue says exists is missing. That means your branch predates a
+merge — rebase before concluding anything.
+
+## Shared Files
+
+`todo.md`, spec files, and contract files are **read-only** to you. They are
+tracked, so your worktree has its own copy, but the human is the only writer.
+Never commit a change to them — several branches editing one file means every PR
+after the first conflicts.
+
+## Stop And Ask
+
+Stop rather than proceeding when:
+
+- a file you need already has an open PR (step 2)
+- the task needs code outside the scope the issue gave you
+- the task requires changing a documented contract
+- a forbidden command is the only way forward
+- the repository state doesn't match what the issue describes
+- you can't verify your own work
+- a change can't be expressed as a commit in this repo
+- you cannot determine the repo's base branch name
+
+Reporting a blocker is a successful outcome. Producing something plausible that
+works around a boundary is not. Always remove your `wip:` label when you stop
+without a PR.
+
+---
+
+# Reference: What The Human Is Doing
+
+Not yours to run — some of it is forbidden above. Here so you understand the
+shape of the workflow.
+
+Because no two open PRs touch the same file, every PR merges cleanly in any
+order. The human works down the queue at whatever pace, marking drafts ready
+and merging, and never rebases anything.
+
+```bash
+# setup, once per agent
+git worktree add ../Agent1 -b agent1-init
+
+# handing out work
+gh issue create -t "03: print class balance" -b "Scope: 03_model.py" -l agent-03
+
+# what's unclaimed
+gh issue list --label agent-03 --search "-label:wip"
+
+# what files are locked by open PRs
+gh pr list --json number,title,files --jq '.[] | "\(.number) \(.title) \(.files[].path)"'
+
+# review — gh-dash in the main checkout
+#   r refresh · d diff in Hunk · W mark ready · m merge
+#   (the checkout key fails: the branch is already in a worktree)
+
+# after merging
+git checkout "$BASE" && git pull
+
+# after a batch, run the pipeline end to end
+# per-branch green does not mean merged-together green
+
+# reset an idle worktree off its merged branch
+git -C ../Agent1 checkout -B agent1-idle origin/$BASE
+
+# teardown
+git worktree remove ../Agent1
+git branch -D agent1-init     # -D: rebase-merge rewrites SHAs
+```
+
+Labels need to exist before they can be applied:
+
+```bash
+gh label create wip:agent1 --color FFA500
+gh label create file:03_model.py --color 0E8A16
+```
+
+Worktree facts: a branch can be checked out in only one worktree at a time;
+`git fetch` is repo-wide but each worktree must `checkout` to move; hardcoded
+absolute paths read from the main checkout regardless of which worktree runs
+the code.
+
+gh-dash reads only `pager.diff` in `~/.config/gh-dash/config.yml` — it ignores
+`core.pager` and `GH_PAGER`.
+
+The human reads state, not just deltas — `git log --reverse -p "$BASE"..<branch>`
+commit by commit, or `git show <sha>:path` for the file as it stands — because a
+diff says what changed, not what the code now is. Granular commits and clear PR
+descriptions are what make that cheap.
