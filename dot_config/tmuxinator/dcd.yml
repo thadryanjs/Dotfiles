@@ -2,7 +2,7 @@ name: dcd
 root: /home/thadryan/Vaults/Projects/Work/Primary/DCD/Code/Repo
 windows:
   - local:
-      layout: "224d,191x48,0,0{130x48,0,0,7,60x48,131,0,14}"
+      layout: main-vertical
       panes:
         - bash -c "uv run nvim; exec bash"
         - bash

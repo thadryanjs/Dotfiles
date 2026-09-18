@@ -11,12 +11,13 @@ windows:
       panes:
         - bash -c "cd /mnt/Workspace/OpthalmologyLLM && nvim -R -c 'set nomodifiable'; exec bash"
         - bash -c "cd /mnt/Workspace/OpthalmologyLLM && exec bash"
-  - staging:
-      layout: even-horizontal
+  - git-overview:
       panes:
         - bash -c "lazygit; exec bash"
+  - git-diff:
+      panes:
         - bash -c "hunk diff --watch; exec bash"
-  - issues:
+  - git-issues:
       panes:
         - bash -c "gh-dash; exec bash"
   - agent1:
@@ -25,3 +26,6 @@ windows:
   - agent2:
       panes:
         - bash -c "cd ../Agent2 && exec bash"
+  - bash:
+      panes:
+        - bash
