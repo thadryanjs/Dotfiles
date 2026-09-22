@@ -25,6 +25,15 @@ return {
           vim.treesitter.start()
         end,
       })
+
+      -- .qmd/.Rmd (quarto/markdown ft) need explicit treesitter start for
+      -- chunk injection highlighting (fsharp, python, r, ...)
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = { "quarto", "markdown" },
+        callback = function()
+          vim.treesitter.start()
+        end,
+      })
     end,
   },
 }
