@@ -99,6 +99,15 @@ alias l='ls -lav --ignore=.?*'   # show long listing but no hidden dotfiles exce
 alias lss='ls -ltrh'
 alias open='xdg-open'
 
+# safe rm: nag instead of deleting (trash-cli approach, per author FAQ)
+# bypass nag with: \rm , command rm , or /usr/bin/rm
+if command -v trash-put >/dev/null 2>&1; then
+    alias rm='echo "use trash-put (or \\rm to force real rm)"; false'
+    alias tp='trash-put'
+    alias tl='trash-list'
+    alias tr='trash-restore'
+fi
+
 export QT_QPA_PLATFORMTHEME=qt5ct
 
 # export TMUX_CONF=~/.config/tmux/tmux.conf

@@ -1,19 +1,25 @@
 name: dev-remote
 root: '.'
 windows:
-  - code:
+  - local:
       layout: main-vertical
       panes:
         - bash -c "nvim; exec bash"
-        - bash
-  - git:
-      panes:
-        - bash -c "lazygit; exec bash"
-  - bash:
-      panes:
         - bash
   - server:
       layout: main-vertical
       panes:
         - bash -c "cd /mnt/Workspace && nvim -R -c 'set nomodifiable'; exec bash"
         - bash -c "cd /mnt/Workspace && exec bash"
+  - git-overview:
+      panes:
+        - bash -c "lazygit; exec bash"
+  - git-diff:
+      panes:
+        - bash -c "hunk diff --watch; exec bash"
+  - git-issues:
+      panes:
+        - bash -c "gh-dash; exec bash"
+  - bash:
+      panes:
+        - bash
