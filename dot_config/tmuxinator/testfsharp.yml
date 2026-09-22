@@ -1,0 +1,14 @@
+name: testfsharp
+root: /home/thadryan/Vaults/Projects/Work/Secondary/TestFSharp
+windows:
+  - local:
+      layout: main-vertical
+      panes:
+        - bash -c "nvim; exec bash"
+        - bash
+  - git-overview:
+      panes:
+        - bash -c "lazygit; exec bash"
+  - bash:
+      panes:
+        - bash

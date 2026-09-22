@@ -88,6 +88,14 @@ arch = { packages = [
   "bubblewrap",
   "dotnet-runtime",
   "dotnet-sdk",
+  "aspnet-runtime",
+  "cli11",
+  "cmake",
+  "gcc-fortran",
+  "ninja", # not toally sure what this is for
+  "python-six", # not toally sure what this is for
+  "qt6-shadertools",
+  "vulkan-headers",
   { name = "python-pipx", hooks = { after_install = [
     "pipx",
     "install",
