@@ -96,6 +96,7 @@ arch = { packages = [
   "python-six", # not toally sure what this is for
   "qt6-shadertools",
   "vulkan-headers",
+  "filen-desktop-bin",
   { name = "python-pipx", hooks = { after_install = [
     "pipx",
     "install",
