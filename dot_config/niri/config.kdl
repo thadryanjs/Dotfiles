@@ -1,8 +1,9 @@
 // Make better use of super vs super+hjkl
 // Can I declare apps in a workspace? ie, have them start automatically
 
-spawn-sh-at-startup "export NIRI_SOCKET=$(ls /run/user/1000/niri.wayland-*.sock | head -n 1); qs -c noctalia-shell --no-duplicate"
+spawn-sh-at-startup "export NIRI_SOCKET=$(ls /run/user/1000/niri.wayland-*.sock | head -n 1); qs -c dms-shell --no-duplicate"
 spawn-sh-at-startup "sleep 3 && (megasync &); sleep 1 && xdotool search --class megasync minimize || true"
+spawn-sh-at-startup "sleep 3 && (filen-desktop &); sleep 1 && xdotool search --class filen minimize || true"
 spawn-sh-at-startup "sleep 2 && wpctl set-mute @DEFAULT_AUDIO_SINK@ 0"
 
 input {
@@ -361,7 +362,7 @@ binds {
     Alt+Q { spawn "kitty"; }
     // non-noctalia
     // Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
-    Mod+D { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
+    Mod+D { spawn-sh "qs -c dms-shell ipc call launcher toggle"; }
     Mod+Z { spawn "fuzzel"; }
 
     Super+Alt+L { spawn "swaylock"; }

@@ -2,7 +2,7 @@
 description: Work autonomously in a dedicated git worktree, detect the base branch, claim issues with wip labels, one draft PR per task, never two open PRs on the same file
 ---
 
-# git-worktree
+# Worktree Agent Skill
 
 You work in a dedicated git worktree. Other agents have their own. The human
 works in the main checkout, reviews your PRs, and is the only one who merges.
