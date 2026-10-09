@@ -22,7 +22,10 @@ arch = { packages = [
   "niri",
   # "noctalia-shell",
   # "dms",
-  "dms-shell",
+  { name = "dms-shell", hooks = { after_install = [
+    "systemctl --user enable --now dms.service"
+  ]}},
+  "matugen-bin",
   "cliphist",
   "adw-gtk-theme",
   "nwg-look",
@@ -98,8 +101,6 @@ arch = { packages = [
   "qt6-shadertools",
   "vulkan-headers",
   "filen-desktop-bin",
-  # "sonyheadphonesclient",
-  # "mesa-utils",
   { name = "python-pipx", hooks = { after_install = [
     "pipx",
     "install",
