@@ -20,12 +20,13 @@ arch = { packages = [
   "wofi",
   "wl-clipboard",
   "niri",
+  "noctalia",
   # "noctalia-shell",
-  # "dms",
-  { name = "dms-shell", hooks = { after_install = [
-    "systemctl --user enable --now dms.service"
-  ]}},
-  "matugen-bin",
+  # "noctalia-qs",
+  # { name = "dms-shell", hooks = { after_install = [
+  #   "systemctl --user enable --now dms.service"
+  # ]}},
+  # "matugen-bin",
   "cliphist",
   "adw-gtk-theme",
   "nwg-look",
@@ -33,11 +34,7 @@ arch = { packages = [
   "fuzzel",
   "xwayland-satellite",
   "bfg",
-  # "mupdf",
-  # "zathura",
   "pandoc-cli",
-  # "wezterm",
-  # "helix",
   "chromium",
   "texlive-xetex",
   "texlive-binextra",
@@ -47,9 +44,9 @@ arch = { packages = [
   "texlive-plaingeneric",
   "libmad",
   { name = "r", hooks = { after_install = [
+    "R -e \"install.packages('languageserver', repos='http://cran.r-project.org')\"",
     "curl -fsSL https://raw.githubusercontent.com/nbafrank/uvr/main/install.sh | sh"
   ]}},
-  # "gh-dash", # awesome but don't need currently, leaving it here for future reference
   "tig",
   "hunk-bin",
   "diffnav",

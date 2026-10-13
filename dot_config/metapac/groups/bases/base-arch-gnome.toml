@@ -22,9 +22,9 @@ arch = { packages = [
   "zoxide",
   "gthumb",
   # "r",
-  { name = "r", hooks = { after_install = [
-      "R -e \"install.packages('languageserver', repos='http://cran.r-project.org')\""
-  ]}},
+  # { name = "r", hooks = { after_install = [
+  #     "R -e \"install.packages('languageserver', repos='http://cran.r-project.org')\""
+  # ]}},
   "neofetch",
   "fuse2",
   "grub-customizer",
