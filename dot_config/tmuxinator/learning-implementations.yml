@@ -1,0 +1,10 @@
+name: learning-implementations
+root: ~/Vaults/Projects/Work/LearningImplementations
+windows:
+  - editor:
+      layout: main-vertical
+      panes:
+        - nvim .
+  - shell:
+      panes:
+        - zsh

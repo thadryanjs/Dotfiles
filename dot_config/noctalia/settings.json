@@ -36,6 +36,9 @@
     },
     "audio": {
         "mprisBlacklist": [
+            "spotify",
+            "com.spotify.Client",
+            "org.spotify.Client"
         ],
         "preferredPlayer": "",
         "spectrumFrameRate": 30,
@@ -537,8 +540,7 @@
         "enabled": true,
         "enabledTypes": [
             0,
-            1,
-            2
+            1
         ],
         "location": "top_right",
         "monitors": [
