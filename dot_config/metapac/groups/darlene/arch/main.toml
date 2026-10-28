@@ -98,6 +98,7 @@ arch = { packages = [
   "qt6-shadertools",
   "vulkan-headers",
   "filen-desktop-bin",
+  "neo-writing",
   { name = "python-pipx", hooks = { after_install = [
     "pipx",
     "install",

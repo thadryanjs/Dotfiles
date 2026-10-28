@@ -1,0 +1,25 @@
+name: merged-algo-code
+root: /home/thadryan/Vaults/Projects/Work/Primary/TheoryProject/MergedAlgo/Code/Repo
+windows:
+  - local:
+      layout: main-vertical
+      panes:
+        - bash -c "nvim; exec bash"
+        - bash
+  - server:
+      layout: main-vertical
+      panes:
+        - bash -c "cd /mnt/Workspace/TheoryProject/MergedAlgo/Code && nvim -R -c 'set nomodifiable'; exec bash"
+        - bash -c "cd /mnt/Workspace/TheoryProject/MergedAlgo/Code && exec bash"
+  - git-overview:
+      panes:
+        - bash -c "lazygit; exec bash"
+  - git-diff:
+      panes:
+        - bash -c "hunk diff --watch; exec bash"
+  - git-issues:
+      panes:
+        - bash -c "gh-dash; exec bash"
+  - bash:
+      panes:
+        - bash

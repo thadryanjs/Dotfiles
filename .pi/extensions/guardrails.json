@@ -5,6 +5,10 @@
       {
         "kind": "directory",
         "path": "~/.config/nvim/lua/plugins"
+      },
+      {
+        "kind": "directory",
+        "path": "/mnt/Workspace"
       }
     ]
   },

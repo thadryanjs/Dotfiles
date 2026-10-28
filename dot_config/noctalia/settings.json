@@ -36,10 +36,7 @@
     },
     "audio": {
         "mprisBlacklist": [
-            "spotify",
-            "com.spotify.Client",
-            "org.spotify.Client"
-        ],
+            ],
         "preferredPlayer": "",
         "spectrumFrameRate": 30,
         "spectrumMirrored": true,
@@ -483,7 +480,7 @@
         "bluetoothAutoConnect": false,
         "bluetoothDetailsViewMode": "grid",
         "bluetoothHideUnnamedDevices": false,
-        "bluetoothRssiPollIntervalMs": 60000,
+        "bluetoothRssiPollIntervalMs": 10000,
         "bluetoothRssiPollingEnabled": false,
         "disableDiscoverability": false,
         "networkPanelView": "wifi",
@@ -540,7 +537,8 @@
         "enabled": true,
         "enabledTypes": [
             0,
-            1
+            1,
+            2
         ],
         "location": "top_right",
         "monitors": [
@@ -662,9 +660,9 @@
     },
     "ui": {
         "boxBorderEnabled": false,
-        "fontDefault": "Adwaita Mono",
+        "fontDefault": "DejaVuSansM Nerd Font",
         "fontDefaultScale": 1.25,
-        "fontFixed": "Adwaita Mono",
+        "fontFixed": "DejaVuSansM Nerd Font Mono",
         "fontFixedScale": 1.25,
         "panelBackgroundOpacity": 0.93,
         "panelsAttachedToBar": true,
@@ -676,7 +674,7 @@
     },
     "wallpaper": {
         "automationEnabled": false,
-        "directory": "/home/thadryan/Pictures/Wallpapers",
+        "directory": "/home/thadryan/Vaults/Home/Areas/Art/Backgrounds/",
         "enableMultiMonitorDirectories": false,
         "enabled": true,
         "favorites": [

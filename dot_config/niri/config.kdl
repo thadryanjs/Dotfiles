@@ -3,6 +3,7 @@
 
 // spawn-sh-at-startup "sleep 1 && /usr/bin/dms run --no-duplicate"
 spawn-sh-at-startup "noctalia"
+spawn-sh-at-startup "sleep 2 && noctalia msg osd-disable"
 spawn-sh-at-startup "sleep 3 && (megasync &); sleep 1 && xdotool search --class megasync minimize || true"
 spawn-sh-at-startup "sleep 3 && (filen-desktop &); sleep 1 && xdotool search --class filen minimize || true"
 spawn-sh-at-startup "sleep 2 && wpctl set-mute @DEFAULT_AUDIO_SINK@ 0"
