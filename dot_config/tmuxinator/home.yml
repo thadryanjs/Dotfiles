@@ -1,21 +1,6 @@
 name: home
-root: /home/thadryan/Vaults/Knowledge
+root: /home/thadryan/Vaults/Home
 windows:
-  - doom-sync:
-      panes:
-        - bash -c "emacs -nw"
-  - nvim-knowledge:
-      layout: main-vertical
-      panes:
-        - uv run nvim
-        - bash
-  - mindmap-overview:
-      layout: tiled
-      panes:
-        - bash -c "h-m-m MindMaps/topline.hmm; exec bash"
-        - bash -c "h-m-m MindMaps/experiments.hmm; exec bash"
-        - bash -c "h-m-m MindMaps/beacons.hmm; exec bash"
-        - bash -c "h-m-m MindMaps/projects.hmm; exec bash"
   - bash:
       panes:
         - bash
