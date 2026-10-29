@@ -114,11 +114,6 @@
           "tool_call": true,
           "attachment": true
         },
-        "zai-org.glm-5.3": {
-          "name": "GLM 5.3",
-          "tool_call": true,
-          "reasoning": true
-        },
         "openai.gpt-oss-120b": {
           "name": "GPT-OSS 120b",
           "tool_call": true,
@@ -126,6 +121,11 @@
         },
         "qwen.qwen3.5-122b": {
           "name": "Qwen 3.5 122B",
+          "tool_call": true,
+          "reasoning": true
+        },
+        "qwen.qwen3.8-27b": {
+          "name": "Qwen 3.8 27B",
           "tool_call": true,
           "reasoning": true
         },
@@ -221,6 +221,11 @@
         },
         "vertex_ai.gemini-3.8-flash": {
           "name": "Gemini 3.8 Flash",
+          "tool_call": true,
+          "attachment": true
+        },
+        "vertex_ai.gemini-4-argon": {
+          "name": "Gemini 4 Argon",
           "tool_call": true,
           "attachment": true
         },
@@ -341,11 +346,6 @@
         },
         "vertex_ai.gemini-2.5-pro": {
           "name": "Gemini 2.5 Pro",
-          "tool_call": true,
-          "attachment": true
-        },
-        "qwen.qwen3-vl:32b": {
-          "name": "Qwen 3 VL 32B",
           "tool_call": true,
           "attachment": true
         }

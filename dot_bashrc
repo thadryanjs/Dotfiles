@@ -67,6 +67,7 @@ alias vaulthome="cd ~/Vaults/Home/"
 alias projects="cd ~/Vaults/Projects/Work/"
 
 alias discovery="sh ~/Vaults/Projects/Tools/Scripts/Dartmouth/discovery.sh"
+alias dartmouth-current-ai-models='with_llm_keys sh ~/Vaults/Projects/Tools/Scripts/Dartmouth/dartmouth-current-ai-models.sh'
 alias polaris="sh ~/Vaults/Projects/Tools/Scripts/Tools/polaris.sh"
 alias andes="sh ~/Vaults/Projects/Tools/Scripts/Dartmouth/andes.sh"
 alias dartfs="sh ~/Vaults/Projects/Tools/Scripts/Dartmouth/Storage/mount-dartfs.sh"

@@ -1,5 +1,5 @@
 name: home
-root: /home/thadryan/Vaults/Knowledge
+root: /home/thadryan/Vaults/Knowledge/
 windows:
   - doom-sync:
       panes:
@@ -19,3 +19,6 @@ windows:
   - bash:
       panes:
         - bash
+
+
+

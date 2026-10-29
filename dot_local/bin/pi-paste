@@ -1,0 +1,24 @@
+#!/bin/bash
+# pi-paste: Save clipboard image to file and print Pi-style reference
+
+# Temporary file path
+TMP_FILE="/tmp/pi_paste_$(date +%s).png"
+
+# Try Wayland first, then X11
+if command -v wl-paste >/dev/null 2>&1; then
+    wl-paste > "$TMP_FILE"
+elif command -v xclip >/dev/null 2>&1; then
+    xclip -selection clipboard -t image/png -o > "$TMP_FILE"
+else
+    echo "Error: No image paste tool found (wl-paste or xclip)." >&2
+    exit 1
+fi
+
+# Verify file was created and is not empty
+if [ -s "$TMP_FILE" ]; then
+    echo "@$TMP_FILE"
+else
+    echo "Error: No image found in clipboard." >&2
+    rm -f "$TMP_FILE"
+    exit 1
+fi

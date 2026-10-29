@@ -114,7 +114,6 @@ config.colors = {
 -- warn about missing glyphs
 config.warn_about_missing_glyphs = false
 
-
 -- allow mouse copy and paste
 -- copy with ctrl+c
 config.keys = {
