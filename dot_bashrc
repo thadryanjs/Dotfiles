@@ -46,6 +46,8 @@ with_llm_keys() {
 opencode() { with_llm_keys command opencode "$@"; }
 pi()       { with_llm_keys command pi "$@"; }
 
+alias nvim-llm-keys='with_llm_keys nvim'
+
 
 # ---
 alias reboot="systemctl reboot"
