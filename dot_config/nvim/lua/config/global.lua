@@ -39,7 +39,7 @@ vim.opt.scrolloff = 5
 vim.opt.spell = false
 vim.opt.spelllang = 'en_us'
 vim.opt.spellsuggest = {'fast', 20}  -- Don't show too many suggestions for spell check
-vim.opt.spellfile = vim.fn.expand("~/Vaults/Projects/Dotfiles/.config/nvim/spell/en.utf-8.add")
+vim.opt.spellfile = vim.fn.expand("~/Vaults/Projects/Dotfiles/dot_config/nvim/spell/en.utf-8.add")
 vim.o.timeoutlen = 30000  -- Increase timeout length to 30 seconds
 -- vim.opt.signcolumn = "yes"im.o.scl = "no"
 -- translating "set formatoptions-=r"
