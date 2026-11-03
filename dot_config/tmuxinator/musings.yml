@@ -1,0 +1,11 @@
+name: musings
+root: /home/thadryan/Vaults/Home/Projects/Musings
+windows:
+  - editor:
+      layout: main-vertical
+      panes:
+        - uv run nvim .
+        - bash
+  - shell:
+      panes:
+        - bash
