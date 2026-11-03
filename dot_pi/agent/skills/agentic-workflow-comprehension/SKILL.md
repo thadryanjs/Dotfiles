@@ -8,6 +8,8 @@ Socratic loop: identify load-bearing logic, quiz human, document synthesized und
 exists because agents write code faster than anyone can absorb it, and the gap
 is invisible until a review goes wrong.
 
+**Note:** The human may request a review of previous context/comprehension files when resuming a project after a break to re-orient their mental model.
+
 Run it while agents are working, or between tickets.
 
 ## What Counts As Load-Bearing
@@ -52,16 +54,31 @@ plenty.
 Write to `comprehension/<area>.md`, with `comprehension/main.md` for repo-wide
 things. Append to the existing file; don't rewrite what's there.
 
+**Structure:**
+1. **Synthesized Understanding**:
+    - `## Concept`
+        - `### Intuitive` (blockquoted "In my own words")
+        - `### Technical` (exact specs/details)
+    - `### Q & A Summary` (cleaned-up path to synthesis)
+    - `### References` (links to code, specs, etc.)
+
 ```markdown
-## <thing that's load-bearing>
+# Comprehension for <area>
+
+## Concept
+
+### Intuitive
+> <The human's own sentence, as they said it. Don't improve it — a lossy version they actually hold is worth more than a precise one they don't.>
 
 ### Technical
 The accurate version. Exact names, paths, dtypes. What breaks if it's violated,
 and where that shows up. Written so it's checkable against the code later.
 
-### In my own words
-The human's own sentence, as they said it. Don't improve it — a lossy version
-they actually hold is worth more than a precise one they don't.
+### Q & A Summary
+Cleaned-up summary of the load-bearing parts of the Socratic exchange.
+
+### References
+> Specs, code, external citations.
 ```
 
 If their sentence is wrong after the exchange, don't file it. File it as an open
