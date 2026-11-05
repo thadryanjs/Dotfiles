@@ -7,16 +7,17 @@ description = "Search vault for #hotkey flagged items"
 [source]
 # Search for #hotkey flag across vault
 command = "rg '#hotkey' /home/thadryan/Vaults/Knowledge --color=never --with-filename --line-number"
-display = "{split::0}:{split::1}"
-output = "{split::0}:{split::1}"
+display = "{split:\\::0}:{split:\\::1}"
+output = "{split:\\::0}:{split:\\::1}"
 
 [preview]
-command = "bat -n --color=always {split::0} 2>/dev/null || cat {split::0}"
+command = "bat -n --color=always --highlight-line '{split:\\::1}' {split:\\::0} 2>/dev/null || cat {split:\\::0}"
+offset = "{split:\\::1}"
 
 [keybindings]
 enter = "actions:open"
 
 [actions.open]
 description = "Open file at line in editor"
-command = "${EDITOR:-nvim} +{split::1} {split::0}"
+command = "${EDITOR:-nvim} +{split:\\::1} {split:\\::0}"
 mode = "execute"

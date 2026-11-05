@@ -52,7 +52,7 @@ arch = { packages = [
   "diffnav",
   "unionfs-fuse",
   "emacs",
-  { name = "pi-coding-agent", hooks = { after_install = [
+  { name = "pi-coding-agent-bin", hooks = { after_install = [
     "pi install git:github.com/MasuRii/pi-tool-display"
   ]}},
   "opencode-bin",
