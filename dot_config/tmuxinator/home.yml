@@ -1,14 +1,14 @@
 name: home
 root: /home/thadryan/Vaults/Knowledge/
 windows:
-  - doom-sync:
-      panes:
-        - bash -c "emacs -nw"
   - nvim-knowledge:
       layout: main-vertical
       panes:
-        - uv run nvim
+        - uv run nvim Knowledge.org
         - bash
+  - doom-sync:
+      panes:
+        - bash -c "emacs -nw"
   - mindmap-overview:
       layout: "0e93,191x48,0,0{95x48,0,0[95x24,0,0,100,95x23,0,25,120],95x48,96,0[95x24,96,0,112,95x23,96,25,119]}"
       panes:

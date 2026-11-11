@@ -1,5 +1,5 @@
 {
-  "$schema": "https://unpkg.com/@aliou/pi-guardrails@0.17.1/schema.json",
+  "$schema": "https://unpkg.com/@aliou/pi-guardrails@0.22.0/schema.json",
   "features": {
     "permissionGate": true
   },
@@ -12,6 +12,10 @@
       {
         "kind": "directory",
         "path": "/mnt/Workspace"
+      },
+      {
+        "kind": "file",
+        "path": "~/Vaults"
       }
     ]
   },
@@ -24,5 +28,5 @@
       }
     ]
   },
-  "version": "0.17.1"
+  "version": "0.19.0"
 }

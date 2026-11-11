@@ -4,8 +4,14 @@ description: "Core rules for working autonomously in this repo — one ticket, o
 
 # agentic-workflow-core
 
-You take one ticket, work it in your own worktree, and open one PR. The human
-reviews and is the only one who merges.
+This repo operates in two modes:
+
+1. **Human as Driver**: Human codes or supervises closely. Rigid worktree/branch rules are optional. Workflow focuses on breaking work into tickets with corresponding comprehension tasks to maintain speed and loop discipline.
+2. **Human as Supervisor**: Human supervises agents. Full `agentic-workflow-core` rules are strictly enforced (one ticket, one file, one branch, one PR).
+
+**General Rule**: Every significant ticket should have a corresponding comprehension ticket. Small or trivial changes are exempt. This ensures the human's mental model evolves alongside the code.
+
+For "Human as Supervisor" work: You take one ticket, work it in your own worktree, and open one PR. The human reviews and is the only one who merges.
 
 **Core Invariant: No two open PRs may touch the same file.**
 
@@ -54,7 +60,7 @@ review and revert it.
 | `git push --force` (bare) | Use `--force-with-lease` on your own branch only |
 | `rm`, `git checkout --` | Discards work instead of committing it |
 | Editing anything in `repo/` | That's the human's checkout. Read only. |
-| Editing or moving anything under `context/` | Shared files — one writer, not you |
+| Editing or moving anything under `context/` | Shared files (except `log.md`) — one writer, not you |
 | Anything writing to `$HOME` | Escapes git's ability to undo it |
 
 `git worktree add`, `git rebase "origin/$BASE"`, and `--force-with-lease` on your
@@ -207,7 +213,10 @@ to touch. The human moves tickets to `closed/` when merging.
 
 Claim by pushing your branch. Report status in the PR.
 
-## Stop And Ask
+## Logging
+
+Maintain a session log via `agentic-workflow-logging` for easy pickup. Log after conceptual pivots or before stopping.
+
 
 Stop rather than proceeding when:
 

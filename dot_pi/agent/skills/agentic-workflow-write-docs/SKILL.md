@@ -32,7 +32,7 @@ Interview human one question at a time. Do not write until all answers are confi
 
 **Contracts** — the single highest-value section, because `agentic-workflow-core`
 tells agents documented contracts are fixed. Anything you fail to write down is
-something an agent may freely change.
+something an agent may freely change. **Always cite the source of the contract (e.g., specific file/line, human confirmation, or external docs). Coding strategies and mathematical formulas MUST be backed by an external source (link, paper, or official documentation) to avoid hallucinated logic.**
 - What does this code read, and from where? Exact paths.
 - What does it write, and where?
 - Column names, dtypes, key names, return shapes — exactly.
@@ -114,6 +114,7 @@ Anything the human wasn't sure about. The agent stops here rather than guessing.
 - Every ticket names exactly one file.
 - No file appears in two open tickets. Check `context/tickets/open/` for tickets
   written earlier, not just the ones from this conversation.
+- Every significant ticket has a corresponding comprehension task/ticket.
 - No slug collides with an existing ticket in `open/` or `closed/`, or with an
   existing branch (`git ls-remote --heads origin`).
 - Every ticket has a verification command.

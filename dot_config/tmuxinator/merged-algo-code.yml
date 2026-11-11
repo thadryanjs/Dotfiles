@@ -13,7 +13,7 @@ windows:
         - bash -c "cd /mnt/Workspace/TheoryProject/MergedAlgo/Code && exec bash"
   - git-overview:
       panes:
-        - bash -c "lazygit; exec bash"
+        - bash -c "cd Code/Repo && lazygit; exec bash"
   - git-diff:
       panes:
         - bash -c "hunk diff --watch; exec bash"
