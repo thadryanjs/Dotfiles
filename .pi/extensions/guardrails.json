@@ -16,6 +16,10 @@
       {
         "kind": "file",
         "path": "~/Vaults"
+      },
+      {
+        "kind": "directory",
+        "path": "~/Vaults/Projects/Work/Primary/TheoryProject/MergedAlgo"
       }
     ]
   },

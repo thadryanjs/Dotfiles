@@ -45,7 +45,7 @@ When they're wrong, don't correct immediately. Ask the question that exposes it
 When they're right but hazy, ask them to say it in one sentence without looking.
 That sentence is what goes in the file.
 
-Stop a thread when they can state it in their own words, or when they say they
+Stop a thread when they can state it in their own words (IMOW), or when they say they
 want it written down as an open question. Three or four areas per session is
 plenty.
 
@@ -57,7 +57,7 @@ things. Append to the existing file; don't rewrite what's there.
 **Structure:**
 1. **Synthesized Understanding**:
     - `## Concept`
-        - `### Intuitive` (blockquoted "In my own words")
+        - `### Intuitive` (blockquoted "In my own words" / IMOW)
         - `### Technical` (exact specs/details)
     - `### Q & A Summary` (cleaned-up path to synthesis)
     - `### References` (links to code, specs, etc.)
@@ -85,6 +85,7 @@ If their sentence is wrong after the exchange, don't file it. File it as an open
 question instead.
 
 **Note:**
+- **IMOW**: "In my own words" — the human's intuitive understanding, used to anchor comprehension.
 - **MWE**: A minimal, executable example of a programming concept might be helpful to include.
 - **WorkVault**: Results may also be filed using the `add-to-workvault` skill for long-term storage.
 

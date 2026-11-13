@@ -6,6 +6,10 @@ description: "Formatting spec for a tool to make Python scrupts into notebook"
 
 I am using `jupytext` so I can write normal Python scripts and compile them to jupyter notebooks to read after for QC/reporting. The formatting is like this for code:
 
+**PROSE PROTECTION: NEVER delete, overwrite, or "summarize" the markdown cells (`# %% [markdown]`). The prose is the primary value of the notebook. Only edit prose if explicitly asked to fix a typo or update a specific fact. If you are unsure, leave it alone.**
+
+**INTEGRITY WARNING: NEVER hardcode results (e.g., `print(f"Target: 1.02")`). Every result must be computed by the code. Hardcoding a result is a lie and a catastrophic failure of professional integrity. It is an automatic hard-fail for any review.**
+
 ## Example
 
 ```

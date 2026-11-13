@@ -62,6 +62,8 @@ review and revert it.
 | Editing anything in `repo/` | That's the human's checkout. Read only. |
 | Editing or moving anything under `context/` | Shared files (except `log.md`) — one writer, not you |
 | Anything writing to `$HOME` | Escapes git's ability to undo it |
+| Deleting prose in notebooks | **CATASTROPHIC FAILURE.** Notebook prose is the narrative; deleting it destroys the project's value. |
+| Hardcoding results | **ABSOLUTE FORBIDDEN.** Hardcoding a result (e.g., `print(f"Result: 1.02")`) instead of calculating it is a lie. It is a total failure of integrity and an automatic hard fail. |
 
 `git worktree add`, `git rebase "origin/$BASE"`, and `--force-with-lease` on your
 own branch are yours to run.
@@ -207,7 +209,7 @@ Everything under `context/` is read-only to you: `overview.md`, `spec/`, and all
 tickets. Your worktree has a copy because it's tracked, not because it's yours.
 
 In particular, **never move a ticket from `open/` to `closed/`**, and never edit
-one to mark it claimed or done. Several branches moving the same file means every
+one to mark it claimed or done. **Tickets are moved to `closed/`, never deleted.** Several branches moving the same file means every
 PR after the first conflicts — and these are the files every branch has a reason
 to touch. The human moves tickets to `closed/` when merging.
 
