@@ -43,6 +43,8 @@ with_llm_keys() {
   "$@"
 }
 
+export OPENCODE_EXPERIMENTAL_BACKGROUND_SUBAGENTS=true
+
 opencode() { with_llm_keys command opencode "$@"; }
 pi()       { with_llm_keys command pi "$@"; }
 
