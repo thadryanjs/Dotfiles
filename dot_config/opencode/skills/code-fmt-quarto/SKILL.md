@@ -1,4 +1,5 @@
 ---
+name: code-fmt-quarto
 compatibility: opencode
 description: "Formatting spec for Quarto manuscripts (.qmd)"
 ---
@@ -6,6 +7,10 @@ description: "Formatting spec for Quarto manuscripts (.qmd)"
 # code-fmt-quarto
 
 I am using Quarto (`.qmd`) to write reports. Quarto allows mixing markdown and executable code blocks. The formatting philosophy is to create a hyper-transparent report — a "math proof for code" — where every transformation is traceable and proven.
+
+**PROSE PROTECTION: NEVER delete, overwrite, or "summarize" the markdown narrative. The prose provides the essential context and interpretation of the results. Deleting prose is a catastrophic failure. Only edit prose if explicitly requested for correction.**
+
+**INTEGRITY WARNING: NEVER hardcode results (e.g., `print(f"Target: 1.02")`). Every result must be computed by the code. Hardcoding a result is a lie and a catastrophic failure of professional integrity. It is an automatic hard-fail for any review.**
 
 ## Structure
 

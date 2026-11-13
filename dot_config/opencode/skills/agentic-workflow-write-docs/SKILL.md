@@ -1,4 +1,5 @@
 ---
+name: agentic-workflow-write-docs
 description: "Interview the human to produce a specific spec, well-scoped tickets, and maintain the comprehension todo list — one ticket, one file, no two tickets naming the same file. Grills for specifics before writing anything. Use when starting new work, breaking a feature into tickets, writing or revising context/spec/, managing comprehension/todo.md, or when a ticket turned out to be too vague or too broad for an agent to execute."
 ---
 
@@ -32,7 +33,7 @@ Interview human one question at a time. Do not write until all answers are confi
 
 **Contracts** — the single highest-value section, because `agentic-workflow-core`
 tells agents documented contracts are fixed. Anything you fail to write down is
-something an agent may freely change.
+something an agent may freely change. **Always cite the source of the contract (e.g., specific file/line, human confirmation, or external docs). Coding strategies and mathematical formulas MUST be backed by an external source (link, paper, or official documentation) to avoid hallucinated logic.**
 - What does this code read, and from where? Exact paths.
 - What does it write, and where?
 - Column names, dtypes, key names, return shapes — exactly.
@@ -109,11 +110,20 @@ The command to run, and what passing looks like.
 Anything the human wasn't sure about. The agent stops here rather than guessing.
 ```
 
+## Ticket Lifecycle
+
+Tickets move from `open/` to `closed/` when merged by the human.
+If a ticket is deprecated or becomes obsolete:
+- Move it to `context/tickets/closed/`.
+- Add a clear note at the top of the ticket: **"DEPRECATED: [Reason why this is no longer needed]"**.
+- Do NOT mark it as "Done" or "Merged" if it was not actually executed. This ensures future audit trails are accurate and avoids confusion about what was implemented.
+
 ## Before You Hand It Over
 
 - Every ticket names exactly one file.
 - No file appears in two open tickets. Check `context/tickets/open/` for tickets
   written earlier, not just the ones from this conversation.
+- Every significant ticket has a corresponding comprehension task/ticket.
 - No slug collides with an existing ticket in `open/` or `closed/`, or with an
   existing branch (`git ls-remote --heads origin`).
 - Every ticket has a verification command.

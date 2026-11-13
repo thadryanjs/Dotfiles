@@ -1,4 +1,5 @@
 ---
+name: agentic-workflow-maintenance
 description: "Check that context/spec/ still matches the code and that comprehension/ is current — find drift after merges, stale tickets, orphan branches, and contracts the code no longer honors. Report findings rather than fixing silently. Use after a batch of merges, when something feels out of date, or on a regular cadence."
 ---
 

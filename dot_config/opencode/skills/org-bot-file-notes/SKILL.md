@@ -1,4 +1,5 @@
 ---
+name: org-bot-file-notes
 description: "Route project-specific notes into the correct project files in the Work Vault"
 ---
 

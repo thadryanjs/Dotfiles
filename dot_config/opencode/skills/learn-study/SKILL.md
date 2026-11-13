@@ -1,4 +1,5 @@
 ---
+name: learn-study
 compatibility: opencode
 description: Comprehensive pedagogical tool for learning complex technical topics via atomic Q&A and methodical quizzing
 ---

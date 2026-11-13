@@ -1,4 +1,5 @@
 ---
+name: org-bot-vault-maintenance
 compatibility: opencode
 description: Keep the Knowledge vault tidy, functional, and structurally improved
 ---

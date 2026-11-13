@@ -4,6 +4,9 @@ description: Make a markdown summary of a repo
 compatibility: opencode
 ---
 
+# code-summarize-repo
+
+## Steps
 Create a markdown summary of the current repo called {yyyy-mm-dd}-{repo-name}-summary.md that includes:
 - A level two header that summarizes the repo in 3-5 sentences.
 - A level two header for each:

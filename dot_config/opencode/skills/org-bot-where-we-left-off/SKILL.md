@@ -1,4 +1,5 @@
 ---
+name: org-bot-where-we-left-off
 compatibility: opencode
 description: "Help user re-orient to a project after a break using git and unix tools to synthesize current state"
 ---

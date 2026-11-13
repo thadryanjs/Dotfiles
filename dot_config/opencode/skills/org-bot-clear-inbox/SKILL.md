@@ -1,4 +1,5 @@
 ---
+name: org-bot-clear-inbox
 description: Process and organize the Knowledge Vault landing zones (Inbox, FileMe, and Working Memory)
 ---
 

@@ -1,4 +1,5 @@
 ---
+name: meta-preferences
 compatibility: opencode
 description: "System for managing and evolving agent personality, constraints, and operational preferences"
 ---

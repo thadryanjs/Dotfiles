@@ -1,4 +1,5 @@
 ---
+name: org-bot-capture
 compatibility: opencode
 description: Capture and file knowledge or tasks into the WorkVault knowledge base
 ---

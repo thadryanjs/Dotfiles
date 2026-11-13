@@ -1,11 +1,18 @@
 ---
+name: agentic-workflow-core
 description: "Core rules for working autonomously in this repo — one ticket, one file, one branch, one PR. Create your own git worktree named for the ticket, claim it by pushing the branch, never edit outside the ticket's file. Use this at the start of every task in this repo, and whenever creating a worktree, picking up a ticket, or opening a PR."
 ---
 
 # agentic-workflow-core
 
-You take one ticket, work it in your own worktree, and open one PR. The human
-reviews and is the only one who merges.
+This repo operates in two modes:
+
+1. **Human as Driver**: Human codes or supervises closely. Rigid worktree/branch rules are optional. Workflow focuses on breaking work into tickets with corresponding comprehension tasks to maintain speed and loop discipline.
+2. **Human as Supervisor**: Human supervises agents. Full `agentic-workflow-core` rules are strictly enforced (one ticket, one file, one branch, one PR).
+
+**General Rule**: Every significant ticket should have a corresponding comprehension ticket. Small or trivial changes are exempt. This ensures the human's mental model evolves alongside the code.
+
+For "Human as Supervisor" work: You take one ticket, work it in your own worktree, and open one PR. The human reviews and is the only one who merges.
 
 **Core Invariant: No two open PRs may touch the same file.**
 
@@ -54,8 +61,10 @@ review and revert it.
 | `git push --force` (bare) | Use `--force-with-lease` on your own branch only |
 | `rm`, `git checkout --` | Discards work instead of committing it |
 | Editing anything in `repo/` | That's the human's checkout. Read only. |
-| Editing or moving anything under `context/` | Shared files — one writer, not you |
+| Editing or moving anything under `context/` | Shared files (except `log.md`) — one writer, not you |
 | Anything writing to `$HOME` | Escapes git's ability to undo it |
+| Deleting prose in notebooks | **CATASTROPHIC FAILURE.** Notebook prose is the narrative; deleting it destroys the project's value. |
+| Hardcoding results | **ABSOLUTE FORBIDDEN.** Hardcoding a result (e.g., `print(f"Result: 1.02")`) instead of calculating it is a lie. It is a total failure of integrity and an automatic hard fail. |
 
 `git worktree add`, `git rebase "origin/$BASE"`, and `--force-with-lease` on your
 own branch are yours to run.
@@ -201,11 +210,15 @@ Everything under `context/` is read-only to you: `overview.md`, `spec/`, and all
 tickets. Your worktree has a copy because it's tracked, not because it's yours.
 
 In particular, **never move a ticket from `open/` to `closed/`**, and never edit
-one to mark it claimed or done. Several branches moving the same file means every
+one to mark it claimed or done. **Tickets are moved to `closed/`, never deleted.** Several branches moving the same file means every
 PR after the first conflicts — and these are the files every branch has a reason
 to touch. The human moves tickets to `closed/` when merging.
 
 Claim by pushing your branch. Report status in the PR.
+
+## Logging
+
+Maintain a session log via `agentic-workflow-logging` for easy pickup. Log after conceptual pivots or before stopping.
 
 ## Stop And Ask
 

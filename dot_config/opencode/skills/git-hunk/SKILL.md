@@ -1,4 +1,5 @@
 ---
+name: git-hunk
 compatibility: opencode
 description: "Communicate with the user in a tidy manner using the Hunk CLI"
 ---
