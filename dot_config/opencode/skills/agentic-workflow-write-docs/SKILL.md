@@ -1,11 +1,11 @@
 ---
 name: agentic-workflow-write-docs
-description: "Interview the human to produce a specific spec, well-scoped tickets, and maintain the comprehension todo list — one ticket, one file, no two tickets naming the same file. Grills for specifics before writing anything. Use when starting new work, breaking a feature into tickets, writing or revising context/spec/, managing comprehension/todo.md, or when a ticket turned out to be too vague or too broad for an agent to execute."
+description: "Interview the human to produce a specific spec and well-scoped tickets (including comprehension tickets) — one ticket, one file, no two tickets naming the same file. Grills for specifics before writing anything. Use when starting new work, breaking a feature into tickets, writing or revising context/spec/, filing comprehension tickets, or when a ticket turned out to be too vague or too broad for an agent to execute."
 ---
 
 # agentic-workflow-write-docs
 
-You interview the human, then write `context/spec/`, `context/tickets/open/`, and maintain `comprehension/todo.md`.
+You interview the human, then write `context/spec/` and `context/tickets/open/` (including comprehension tickets for unresolved logic gaps when needed).
 Agents execute what you write with no further access to the human, so vagueness
 here becomes an agent guessing later.
 
@@ -68,11 +68,11 @@ The failure mode is a ticket that reads fine and can't be executed. Push on:
 
 ## Writing The Spec
 
-`context/spec/main.md` holds what's fixed across tickets: contracts, paths,
+`context/spec/general.md` holds what's fixed across tickets: contracts, paths,
 invariants, the things agents must not change. Split into
-`context/spec/<area>.md` when main gets long enough to skim badly.
+`context/spec/<area>.md` when it gets long enough to skim badly.
 
-You also manage `comprehension/todo.md` — ensuring unresolved logic gaps are tracked as concrete questions for future socratic sessions.
+Track unresolved logic gaps as concrete tickets in `context/tickets/open/` (comprehension tickets), not in `comprehension/todo.md`. Comprehension tickets may stand alone without a code anchor when requested/needed, but each must name exactly one file in scope (e.g. `comprehension/<area>.md`, `comprehension/main.md`, or a specific `context/spec/*.md`) and follow core invariants.
 
 State contracts as facts, not intentions. "`03_model.py` reads
 `data/clean.parquet` and writes `out/metrics.json` with keys `acc`, `f1`" — not
@@ -100,7 +100,7 @@ agree on whether it is.
 What not to touch, especially adjacent things an agent would be tempted to fix.
 
 ## Contract
-What this reads and writes, exactly. Or: "see context/spec/main.md#<section>".
+What this reads and writes, exactly. Or: "see context/spec/general.md#<section>".
 These are fixed — the agent must stop and ask rather than change them.
 
 ## Verify

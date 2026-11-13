@@ -80,8 +80,7 @@ Group by required action, not discovery method:
   violates. Fix before assigning more work.
 - **Spec is wrong** — agents are currently being told something false. Highest
   value, since it's actively producing bad work.
-- **Docs are stale** — comprehension sections describing moved code. Feeds
-  `comprehension/todo.md`.
+- **Docs are stale** — comprehension sections describing moved code. Feeds comprehension tickets in `context/tickets/open/` (or flag for ticket creation).
 - **Tidying** — orphan branches, unpruned worktrees, obsolete tickets.
 
 For each, say what you checked and what you found, so a false positive is

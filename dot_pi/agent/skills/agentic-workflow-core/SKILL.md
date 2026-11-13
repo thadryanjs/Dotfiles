@@ -9,7 +9,7 @@ This repo operates in two modes:
 1. **Human as Driver**: Human codes or supervises closely. Rigid worktree/branch rules are optional. Workflow focuses on breaking work into tickets with corresponding comprehension tasks to maintain speed and loop discipline.
 2. **Human as Supervisor**: Human supervises agents. Full `agentic-workflow-core` rules are strictly enforced (one ticket, one file, one branch, one PR).
 
-**General Rule**: Every significant ticket should have a corresponding comprehension ticket. Small or trivial changes are exempt. This ensures the human's mental model evolves alongside the code.
+**General Rule**: Every significant ticket should have a corresponding comprehension ticket. Small or trivial changes are exempt. Comprehension tickets may also exist on their own (no code anchor) when requested or needed, but like all tickets they must name exactly one file in scope (e.g. `comprehension/<area>.md` or `context/spec/general.md`) and follow the core invariants. This ensures the human's mental model evolves alongside the code.
 
 For "Human as Supervisor" work: You take one ticket, work it in your own worktree, and open one PR. The human reviews and is the only one who merges.
 
@@ -24,8 +24,8 @@ merge cleanly in any order and nothing needs rebasing.
 ```
 repo/                  # main checkout — read here, never edit or commit here
   context/
-    overview.md        # read first
-    spec/main.md       # contracts
+    main.md            # read first
+    spec/general.md    # contracts
     tickets/
       open/            # available work
       closed/          # done — the human moves them here after merging
@@ -122,7 +122,7 @@ don't touch another agent's worktree.
 
 ### 4. Read the spec
 
-Read `context/overview.md`, the ticket, and whatever under `context/spec/` it
+Read `context/main.md`, the ticket, and whatever under `context/spec/` it
 points to. The ticket states the task, **the one file in scope**, and any fixed
 contract: what your code reads and writes, column names, dtypes, paths.
 
@@ -205,7 +205,7 @@ rebase before concluding anything.
 
 ## Shared Files
 
-Everything under `context/` is read-only to you: `overview.md`, `spec/`, and all
+Everything under `context/` is read-only to you: `context/main.md`, `context/spec/`, and all
 tickets. Your worktree has a copy because it's tracked, not because it's yours.
 
 In particular, **never move a ticket from `open/` to `closed/`**, and never edit

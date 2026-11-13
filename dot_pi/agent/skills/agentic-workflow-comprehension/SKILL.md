@@ -89,26 +89,16 @@ question instead.
 - **MWE**: A minimal, executable example of a programming concept might be helpful to include.
 - **WorkVault**: Results may also be filed using the `add-to-workvault` skill for long-term storage.
 
-## comprehension/todo.md
+## Unresolved items → tickets
 
-For anything unresolved:
+Do not maintain `comprehension/todo.md`. For anything unresolved, create (or ask the human to create) a specific ticket in `context/tickets/open/` with the question/area made concrete.
 
-```markdown
-- [ ] <area>: <the specific question, not "understand X">
-```
-
-Three sources feed this: areas you identified but didn't get to, questions the
-human couldn't answer, and answers where **the code turned out to disagree with
-`context/spec/`** — those are the valuable ones, because they mean the spec is
-wrong and agents are being told something false. Flag those to the human
-immediately rather than just filing them.
+- Unresolved items include: areas identified but not covered, questions the human couldn't answer, and answers where **the code turned out to disagree with `context/spec/`** (spec is wrong/agents told something false — flag immediately).
+- Comprehension tickets are first-class and may exist without a code anchor when requested or needed, but each ticket must name **exactly one file** in scope (e.g. `comprehension/<area>.md`, `comprehension/main.md`, or a specific `context/spec/*.md`) and follow core invariants.
 
 ## Writing These Files
 
-`comprehension/` is tracked but no ticket names it, so these commits can't
-conflict with agent work. Commit them straight to the base branch — this is the
-one exception to routing your own work through a branch, and it holds only
-because nothing else touches these files.
+`comprehension/` is tracked. Unticketed `comprehension/` updates (where no ticket names the file) may be committed straight to the base branch because they don't conflict with agent work — an exception to routing work through a branch. If a ticket names a `comprehension/` or spec file, edit it via that ticket's worktree/branch/PR flow per `agentic-workflow-core`.
 
 Keep each file skimmable. The point is a thing the human will re-read, not a
 transcript.
