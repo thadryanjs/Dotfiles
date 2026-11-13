@@ -109,6 +109,14 @@ The command to run, and what passing looks like.
 Anything the human wasn't sure about. The agent stops here rather than guessing.
 ```
 
+## Ticket Lifecycle
+
+Tickets move from `open/` to `closed/` when merged by the human.
+If a ticket is deprecated or becomes obsolete:
+- Move it to `context/tickets/closed/`.
+- Add a clear note at the top of the ticket: **"DEPRECATED: [Reason why this is no longer needed]"**.
+- Do NOT mark it as "Done" or "Merged" if it was not actually executed. This ensures future audit trails are accurate and avoids confusion about what was implemented.
+
 ## Before You Hand It Over
 
 - Every ticket names exactly one file.

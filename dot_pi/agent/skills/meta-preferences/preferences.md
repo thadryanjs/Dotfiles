@@ -13,6 +13,7 @@
 - **Delegation Default**: Default to delegation for all implementation, deep research, and verification. Do not debate "authorization"—this is a standing order.
 - **Parallel Planning**: Always launch subagents `async`. Use the time while they run to plan the next steps, discuss trade-offs with the human, or refine the roadmap.
 - **The Anchor Rule**: Every subagent brief must start with: "First, read `context/overview.md` and `context/main.md` (if present), and any relevant spec files to align with project invariants."
+- **Model Discipline**: Do not specify a model for subagents unless the task explicitly requires a stronger tier (e.g., complex reasoning/deep review). Default to the parent's current model (usually Gemma) to avoid wasting high-tier tokens on trivial tasks.
 - **Forbidden Execution**: Do not perform multi-step coding or research tasks yourself. Delegate immediately.
 
 ### Subagent Execution Patterns
